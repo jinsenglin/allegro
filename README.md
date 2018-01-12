@@ -64,9 +64,23 @@ Delete file `main.hpp` [ Move to Trash ]
 
 Find `allegro-exercise`
 
+Method 1
+
+```
 Right click, then choose `Add Files to "allegro-exercise"`
 
 Navigate to `Allegro-5/template/code/`, then select all files
+```
+
+Method 2
+
+```
+cp Allegro-5/template/code/* allegro-exercise/allegro-exercise/
+
+Right click, then choose `Add Files to "allegro-exercise"`
+
+Navigate to `allegro-exercise/allegro-exercise/`, then select all files
+```
 
 Press `Build and then run the current scheme`
 
