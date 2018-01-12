@@ -7,20 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA12E80D200905B600665F9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA12E80C200905B600665F9B /* AppDelegate.m */; };
 		BA12E80F200905B600665F9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA12E80E200905B600665F9B /* Assets.xcassets */; };
 		BA12E812200905B600665F9B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA12E810200905B600665F9B /* MainMenu.xib */; };
-		BA12E815200905B600665F9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA12E814200905B600665F9B /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA12E808200905B600665F9B /* allegro-exercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "allegro-exercise.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA12E80B200905B600665F9B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		BA12E80C200905B600665F9B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BA12E80E200905B600665F9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA12E811200905B600665F9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BA12E813200905B600665F9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA12E814200905B600665F9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BA12E816200905B600665F9B /* allegro_exercise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = allegro_exercise.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,12 +49,9 @@
 		BA12E80A200905B600665F9B /* allegro-exercise */ = {
 			isa = PBXGroup;
 			children = (
-				BA12E80B200905B600665F9B /* AppDelegate.h */,
-				BA12E80C200905B600665F9B /* AppDelegate.m */,
 				BA12E80E200905B600665F9B /* Assets.xcassets */,
 				BA12E810200905B600665F9B /* MainMenu.xib */,
 				BA12E813200905B600665F9B /* Info.plist */,
-				BA12E814200905B600665F9B /* main.m */,
 				BA12E816200905B600665F9B /* allegro_exercise.entitlements */,
 			);
 			path = "allegro-exercise";
@@ -135,8 +127,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA12E815200905B600665F9B /* main.m in Sources */,
-				BA12E80D200905B600665F9B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
