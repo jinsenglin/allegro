@@ -1,4 +1,7 @@
 *.swp
 
+# mac
+.DS_Store
+
 # xcode
 *.xcuserstate
