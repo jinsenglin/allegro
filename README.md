@@ -71,3 +71,8 @@ Navigate to `Allegro-5/template/code/`, then select all files
 Press `Build and then run the current scheme`
 
 You should see a game window with background music.
+
+# Addtional Resources
+
+* https://wiki.allegro.cc/index.php?title=Allegro_5_API_Tutorials
+* http://fixbyproximity.com/2d-game-development-course/
