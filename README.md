@@ -52,4 +52,22 @@ Right click to add new file, then choose `C++ File` and type Name `main.cpp`
 
 See `examples/1/main.cpp`
 
-Pree `Build and then run the current scheme`
+Press `Build and then run the current scheme`
+
+You should see a window filled with purple color.
+
+# Final Project
+
+Delete file `main.cpp` [ Move to Trash ]
+
+Delete file `main.hpp` [ Move to Trash ]
+
+Find `allegro-exercise`
+
+Right click, then choose `Add Files to "allegro-exercise"`
+
+Navigate to `Allegro-5/template/code/`, then select all files
+
+Press `Build and then run the current scheme`
+
+You should see a game window with background music.

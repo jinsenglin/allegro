@@ -35,7 +35,13 @@
 		BA12E84F20090D2900665F9B /* liballegro_dialog.5.2.3.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BA12E84220090D2900665F9B /* liballegro_dialog.5.2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BA12E85020090D2900665F9B /* liballegro_primitives.5.2.3.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BA12E84320090D2900665F9B /* liballegro_primitives.5.2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BA12E85120090D2900665F9B /* liballegro.5.2.3.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BA12E84420090D2900665F9B /* liballegro.5.2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		BA12E85420090E5700665F9B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA12E85220090E5700665F9B /* main.cpp */; };
+		BA12E85C2009129B00665F9B /* pirulen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA12E8552009129A00665F9B /* pirulen.ttf */; };
+		BA12E85D2009129B00665F9B /* hello.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA12E8562009129A00665F9B /* hello.wav */; };
+		BA12E85E2009129B00665F9B /* stage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA12E8572009129B00665F9B /* stage.jpg */; };
+		BA12E85F2009129B00665F9B /* azir.png in Resources */ = {isa = PBXBuildFile; fileRef = BA12E8582009129B00665F9B /* azir.png */; };
+		BA12E8602009129B00665F9B /* maokai.png in Resources */ = {isa = PBXBuildFile; fileRef = BA12E8592009129B00665F9B /* maokai.png */; };
+		BA12E8612009129B00665F9B /* teemo.png in Resources */ = {isa = PBXBuildFile; fileRef = BA12E85A2009129B00665F9B /* teemo.png */; };
+		BA12E8622009129B00665F9B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA12E85B2009129B00665F9B /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,8 +101,13 @@
 		BA12E84220090D2900665F9B /* liballegro_dialog.5.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro_dialog.5.2.3.dylib; path = ../../../../../usr/local/Cellar/allegro/5.2.3.0/lib/liballegro_dialog.5.2.3.dylib; sourceTree = "<group>"; };
 		BA12E84320090D2900665F9B /* liballegro_primitives.5.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro_primitives.5.2.3.dylib; path = ../../../../../usr/local/Cellar/allegro/5.2.3.0/lib/liballegro_primitives.5.2.3.dylib; sourceTree = "<group>"; };
 		BA12E84420090D2900665F9B /* liballegro.5.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro.5.2.3.dylib; path = ../../../../../usr/local/Cellar/allegro/5.2.3.0/lib/liballegro.5.2.3.dylib; sourceTree = "<group>"; };
-		BA12E85220090E5700665F9B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		BA12E85320090E5700665F9B /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
+		BA12E8552009129A00665F9B /* pirulen.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pirulen.ttf; path = "../../Allegro-5/template/code/pirulen.ttf"; sourceTree = "<group>"; };
+		BA12E8562009129A00665F9B /* hello.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hello.wav; path = "../../Allegro-5/template/code/hello.wav"; sourceTree = "<group>"; };
+		BA12E8572009129B00665F9B /* stage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stage.jpg; path = "../../Allegro-5/template/code/stage.jpg"; sourceTree = "<group>"; };
+		BA12E8582009129B00665F9B /* azir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = azir.png; path = "../../Allegro-5/template/code/azir.png"; sourceTree = "<group>"; };
+		BA12E8592009129B00665F9B /* maokai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maokai.png; path = "../../Allegro-5/template/code/maokai.png"; sourceTree = "<group>"; };
+		BA12E85A2009129B00665F9B /* teemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teemo.png; path = "../../Allegro-5/template/code/teemo.png"; sourceTree = "<group>"; };
+		BA12E85B2009129B00665F9B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "../../Allegro-5/template/code/main.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,12 +167,17 @@
 		BA12E80A200905B600665F9B /* allegro-exercise */ = {
 			isa = PBXGroup;
 			children = (
+				BA12E8582009129B00665F9B /* azir.png */,
+				BA12E8562009129A00665F9B /* hello.wav */,
+				BA12E85B2009129B00665F9B /* main.cpp */,
+				BA12E8592009129B00665F9B /* maokai.png */,
+				BA12E8552009129A00665F9B /* pirulen.ttf */,
+				BA12E8572009129B00665F9B /* stage.jpg */,
+				BA12E85A2009129B00665F9B /* teemo.png */,
 				BA12E80E200905B600665F9B /* Assets.xcassets */,
 				BA12E810200905B600665F9B /* MainMenu.xib */,
 				BA12E813200905B600665F9B /* Info.plist */,
 				BA12E816200905B600665F9B /* allegro_exercise.entitlements */,
-				BA12E85220090E5700665F9B /* main.cpp */,
-				BA12E85320090E5700665F9B /* main.hpp */,
 			);
 			path = "allegro-exercise";
 			sourceTree = "<group>";
@@ -246,7 +262,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA12E80F200905B600665F9B /* Assets.xcassets in Resources */,
+				BA12E85D2009129B00665F9B /* hello.wav in Resources */,
+				BA12E85E2009129B00665F9B /* stage.jpg in Resources */,
+				BA12E8602009129B00665F9B /* maokai.png in Resources */,
+				BA12E85C2009129B00665F9B /* pirulen.ttf in Resources */,
 				BA12E812200905B600665F9B /* MainMenu.xib in Resources */,
+				BA12E8612009129B00665F9B /* teemo.png in Resources */,
+				BA12E85F2009129B00665F9B /* azir.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA12E85420090E5700665F9B /* main.cpp in Sources */,
+				BA12E8622009129B00665F9B /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
