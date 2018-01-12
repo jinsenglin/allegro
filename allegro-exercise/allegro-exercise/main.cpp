@@ -127,8 +127,8 @@ void game_begin() {
     // Load and draw text
     font = al_load_ttf_font("pirulen.ttf",12,0);
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to start");
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press 'A' to about");
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'E' to exit");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press '1' to about");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to exit");
     al_draw_rectangle(200, 410, 600, 450, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 460, 600, 500, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
@@ -185,6 +185,10 @@ int process_event(){
             case ALLEGRO_KEY_ENTER:
                 judge_next_window = true;
                 break;
+                
+            // For Exit Menu
+            case ALLEGRO_KEY_ESCAPE:
+                return GAME_TERMINATE;
         }
     }
 
