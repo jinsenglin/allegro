@@ -35,6 +35,7 @@
 		BA12E84F20090D2900665F9B /* liballegro_dialog.5.2.3.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BA12E84220090D2900665F9B /* liballegro_dialog.5.2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BA12E85020090D2900665F9B /* liballegro_primitives.5.2.3.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BA12E84320090D2900665F9B /* liballegro_primitives.5.2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BA12E85120090D2900665F9B /* liballegro.5.2.3.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BA12E84420090D2900665F9B /* liballegro.5.2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		BA12E85420090E5700665F9B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA12E85220090E5700665F9B /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,6 +95,8 @@
 		BA12E84220090D2900665F9B /* liballegro_dialog.5.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro_dialog.5.2.3.dylib; path = ../../../../../usr/local/Cellar/allegro/5.2.3.0/lib/liballegro_dialog.5.2.3.dylib; sourceTree = "<group>"; };
 		BA12E84320090D2900665F9B /* liballegro_primitives.5.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro_primitives.5.2.3.dylib; path = ../../../../../usr/local/Cellar/allegro/5.2.3.0/lib/liballegro_primitives.5.2.3.dylib; sourceTree = "<group>"; };
 		BA12E84420090D2900665F9B /* liballegro.5.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro.5.2.3.dylib; path = ../../../../../usr/local/Cellar/allegro/5.2.3.0/lib/liballegro.5.2.3.dylib; sourceTree = "<group>"; };
+		BA12E85220090E5700665F9B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BA12E85320090E5700665F9B /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,8 @@
 				BA12E810200905B600665F9B /* MainMenu.xib */,
 				BA12E813200905B600665F9B /* Info.plist */,
 				BA12E816200905B600665F9B /* allegro_exercise.entitlements */,
+				BA12E85220090E5700665F9B /* main.cpp */,
+				BA12E85320090E5700665F9B /* main.hpp */,
 			);
 			path = "allegro-exercise";
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA12E85420090E5700665F9B /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

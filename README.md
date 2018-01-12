@@ -43,3 +43,9 @@ Move all the selected file to `Linked Frameworks and Libraries`
 Go to `Build phases`, then press the `+` and choose `New Copy Files Phase`
 
 Find `Copy Files`, then change Destination from `Resources` to `Frameworks`. Then drag the files you selected before to here and choose `Create groups`.
+
+# main.cpp
+
+Find `allegro-exercise`
+
+Right click to add new file, then choose `C++ File` and type Name `main.cpp`
