@@ -49,3 +49,7 @@ Find `Copy Files`, then change Destination from `Resources` to `Frameworks`. The
 Find `allegro-exercise`
 
 Right click to add new file, then choose `C++ File` and type Name `main.cpp`
+
+See `examples/1/main.cpp`
+
+Pree `Build and then run the current scheme`
