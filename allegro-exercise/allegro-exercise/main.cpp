@@ -42,15 +42,12 @@ Character character3;
 
 Character character1Weapon;
 Character character2Weapon;
-Character character3Weapon;
 
 bool character1WeaponFlying = false;
 bool character2WeaponFlying = false;
-bool character3WeaponFlying = false;
 
 int character1HP = 100;
 int character2HP = 100;
-int character3HP = 100;
 
 int winner = 0;
 
@@ -72,6 +69,7 @@ void game_destroy();
 void display_window1();
 void display_window3();
 void display_window4();
+void reset();
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -245,8 +243,8 @@ int process_event(){
                         next_window = 1;
                         break;
                     case 4:
-                        next_window = 2;
                         // Restart
+                        next_window = 2;
                         break;
                     default:
                         break;
@@ -286,6 +284,8 @@ int game_run() {
                 judge_next_window = false;
                 switch (next_window) {
                     case 2:
+                        reset();
+                        /*
                         // Setting Character
                         character1.x = WIDTH / 2 - 300;
                         character1.y = HEIGHT / 2 + 75;
@@ -303,7 +303,7 @@ int game_run() {
                         character2Weapon.x = character2.x;
                         character2Weapon.y = character2.y;
                         character2Weapon.image_path = al_load_bitmap("dart.png");
-                        character3Weapon.image_path = al_load_bitmap("dart.png");
+                        character3Weapon.image_path = al_load_bitmap("dart.png");*/
                         
                         //Initialize Timer
                         timer  = al_create_timer(1.0);
@@ -351,7 +351,6 @@ int game_run() {
                 al_draw_bitmap(background, 0, 0, 0);
                 if(ture_1)al_draw_bitmap(character1.image_path, character1.x, character1.y, 0);
                 if(ture_2)al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
-                else al_draw_bitmap(character3.image_path, character2.x, character2.y, 0);
                 
                 // Draw HP bar
                 al_draw_filled_rectangle(10, 10, 10 + character1HP, 20, al_map_rgb(255, 0, 0));
@@ -388,18 +387,22 @@ int game_run() {
         }
     }
     else if (window == 4){
-        if (!al_is_event_queue_empty(event_queue)) {
-            error = process_event();
-            if(judge_next_window) {
-                window = next_window;
-                judge_next_window = false;
-                switch (next_window) {
-                    case 2:
-                        //display_window2();
-                        break;
-                    default:
-                        break;
-                }
+        if(judge_next_window) {
+            window = next_window;
+            judge_next_window = false;
+            switch (next_window) {
+                case 2:
+                    //display_window2();
+                    reset();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else {
+            // Listening for new event
+            if (!al_is_event_queue_empty(event_queue)) {
+                error = process_event();
             }
         }
     }
@@ -460,4 +463,27 @@ void display_window4() {
     al_draw_rectangle(200, 460, 600, 500, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
     al_flip_display();
+}
+
+void reset() {
+    // Setting Character
+    character1.x = WIDTH / 2 - 300;
+    character1.y = HEIGHT / 2 + 75;
+    character2.x = WIDTH / 2 + 170;
+    character2.y = HEIGHT / 2 + 100;
+    character1.image_path = al_load_bitmap("maokai.png");
+    character2.image_path= al_load_bitmap("teemo.png");
+    character3.image_path = al_load_bitmap("Azir.png");
+    background = al_load_bitmap("stage.jpg");
+    
+    character1HP = 100;
+    character2HP = 100;
+    
+    // Setting Character's Weapon
+    character1Weapon.x = character1.x;
+    character1Weapon.y = character1.y;
+    character1Weapon.image_path = al_load_bitmap("fireball.png");
+    character2Weapon.x = character2.x;
+    character2Weapon.y = character2.y;
+    character2Weapon.image_path = al_load_bitmap("dart.png");
 }
