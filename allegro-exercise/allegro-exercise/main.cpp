@@ -39,6 +39,10 @@ Character character1;
 Character character2;
 Character character3;
 
+Character character1Weapon;
+Character character2Weapon;
+Character character3Weapon;
+
 int character1HP = 100;
 int character2HP = 100;
 int character3HP = 100;
@@ -161,31 +165,39 @@ int process_event(){
             // P1 control
             case ALLEGRO_KEY_W:
                 character1.y -= 30;
+                character1Weapon.y = character1.y;
                 break;
             case ALLEGRO_KEY_S:
                 character1.y += 30;
+                character1Weapon.y = character1.y;
                 break;
             case ALLEGRO_KEY_A:
                 character1.x -= 30;
+                character1Weapon.x = character1.x;
                 character1HP -= 10;
                 break;
             case ALLEGRO_KEY_D:
                 character1.x += 30;
+                character1Weapon.x = character1.x;
                 break;
 
             // P2 control
             case ALLEGRO_KEY_UP:
                 character2.y -= 30;
+                character2Weapon.y = character2.y;
                 break;
             case ALLEGRO_KEY_DOWN:
                 character2.y += 30;
+                character2Weapon.y = character2.y;
                 break;
             case ALLEGRO_KEY_RIGHT:
                 character2.x += 30;
+                character2Weapon.x = character2.x;
                 character2HP -= 10;
                 break;
             case ALLEGRO_KEY_LEFT:
                 character2.x -= 30;
+                character2Weapon.x = character2.x;
                 break;
 
             // For Start Menu
@@ -232,6 +244,15 @@ int game_run() {
                         character3.image_path = al_load_bitmap("Azir.png");
                         background = al_load_bitmap("stage.jpg");
                         
+                        // Setting Character's Weapon
+                        character1Weapon.x = character1.x;
+                        character1Weapon.y = character1.y;
+                        character1Weapon.image_path = al_load_bitmap("dart.png");
+                        character2Weapon.x = character2.x;
+                        character2Weapon.y = character2.y;
+                        character2Weapon.image_path = al_load_bitmap("dart.png");
+                        character3Weapon.image_path = al_load_bitmap("dart.png");
+                        
                         //Initialize Timer
                         timer  = al_create_timer(1.0);
                         timer2  = al_create_timer(1.0/3.0);
@@ -266,9 +287,14 @@ int game_run() {
         if(ture_2)al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
         else al_draw_bitmap(character3.image_path, character2.x, character2.y, 0);
         
-        // Re-draw HP bar
+        // Draw HP bar
         al_draw_filled_rectangle(10, 10, 10 + character1HP, 20, al_map_rgb(255, 0, 0));
         al_draw_filled_rectangle(10, 50, 10 + character2HP, 60, al_map_rgb(255, 0, 0));
+        
+        // Draw weapon
+        if(ture_1)al_draw_bitmap(character1Weapon.image_path, character1Weapon.x, character1Weapon.y, 0);
+        if(ture_2)al_draw_bitmap(character2Weapon.image_path, character2Weapon.x, character2Weapon.y, 0);
+        else al_draw_bitmap(character3Weapon.image_path, character2Weapon.x, character2Weapon.y, 0);
         
         al_flip_display();
         al_clear_to_color(al_map_rgb(0,0,0));

@@ -42,6 +42,7 @@
 		BA92641F20091B2700F096B7 /* azir.png in Resources */ = {isa = PBXBuildFile; fileRef = BA92641820091B2700F096B7 /* azir.png */; };
 		BA92642020091B2700F096B7 /* stage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA92641920091B2700F096B7 /* stage.jpg */; };
 		BA92642120091B2700F096B7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA92641A20091B2700F096B7 /* main.cpp */; };
+		BAD2CB3E200A265200E3CE9B /* dart.png in Resources */ = {isa = PBXBuildFile; fileRef = BAD2CB3D200A265200E3CE9B /* dart.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -108,6 +109,7 @@
 		BA92641820091B2700F096B7 /* azir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = azir.png; sourceTree = "<group>"; };
 		BA92641920091B2700F096B7 /* stage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stage.jpg; sourceTree = "<group>"; };
 		BA92641A20091B2700F096B7 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BAD2CB3D200A265200E3CE9B /* dart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dart.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 		BA12E80A200905B600665F9B /* allegro-exercise */ = {
 			isa = PBXGroup;
 			children = (
+				BAD2CB3D200A265200E3CE9B /* dart.png */,
 				BA92641820091B2700F096B7 /* azir.png */,
 				BA92641620091B2700F096B7 /* hello.wav */,
 				BA92641A20091B2700F096B7 /* main.cpp */,
@@ -263,6 +266,7 @@
 			files = (
 				BA12E80F200905B600665F9B /* Assets.xcassets in Resources */,
 				BA12E812200905B600665F9B /* MainMenu.xib in Resources */,
+				BAD2CB3E200A265200E3CE9B /* dart.png in Resources */,
 				BA92641B20091B2700F096B7 /* teemo.png in Resources */,
 				BA92641F20091B2700F096B7 /* azir.png in Resources */,
 				BA92642020091B2700F096B7 /* stage.jpg in Resources */,
