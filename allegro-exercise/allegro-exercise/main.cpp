@@ -129,18 +129,17 @@ void game_init() {
     al_init_font_addon();
     al_init_ttf_addon();
 
+    // Display window #0
+    display_window0();
+    al_rest(3);
+    window = 1;
+    
     // Register event
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_keyboard_event_source());
 }
 
-void game_begin() {
-    // Display window #0
-    display_window0();
-    
-    al_rest(3);
-    window = 1;
-    
+void game_begin() {    
     // Load sound
     song = al_load_sample( "hello.wav" );
     if (!song){
