@@ -182,19 +182,19 @@ int process_event(){
         {
             // P1 control
             case ALLEGRO_KEY_W:
-                character1.y -= 30;
+                if (character1.y - 30 >= 0) character1.y -= 30;
                 character1Weapon.y = character1.y;
                 break;
             case ALLEGRO_KEY_S:
-                character1.y += 30;
+                if (character1.y + 30 <= HEIGHT-100) character1.y += 30;
                 character1Weapon.y = character1.y;
                 break;
             case ALLEGRO_KEY_A:
-                character1.x -= 30;
+                if (character1.x - 30 >= 0) character1.x -= 30;
                 character1Weapon.x = character1.x;
                 break;
             case ALLEGRO_KEY_D:
-                character1.x += 30;
+                if (character1.x + 30 <= WIDTH-100) character1.x += 30;
                 character1Weapon.x = character1.x;
                 break;
             case ALLEGRO_KEY_X:
@@ -203,19 +203,19 @@ int process_event(){
 
             // P2 control
             case ALLEGRO_KEY_UP:
-                character2.y -= 30;
+                if (character2.y - 30 >= 0) character2.y -= 30;
                 character2Weapon.y = character2.y;
                 break;
             case ALLEGRO_KEY_DOWN:
-                character2.y += 30;
+                if (character2.y + 30 <= HEIGHT-100) character2.y += 30;
                 character2Weapon.y = character2.y;
                 break;
             case ALLEGRO_KEY_RIGHT:
-                character2.x += 30;
+                if (character2.x + 30 <= WIDTH-100) character2.x += 30;
                 character2Weapon.x = character2.x;
                 break;
             case ALLEGRO_KEY_LEFT:
-                character2.x -= 30;
+                if (character2.x - 30 >= 0) character2.x -= 30;
                 character2Weapon.x = character2.x;
                 break;
             case ALLEGRO_KEY_Y:
