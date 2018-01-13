@@ -17,8 +17,6 @@ ALLEGRO_BITMAP *image2 = NULL;
 ALLEGRO_BITMAP *image3 = NULL;
 ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_KEYBOARD_STATE keyState ;
-ALLEGRO_TIMER *timer = NULL;
-ALLEGRO_TIMER *timer2 = NULL;
 ALLEGRO_TIMER *timerWeapon = NULL;
 ALLEGRO_SAMPLE *song=NULL;
 ALLEGRO_FONT *font = NULL;
@@ -150,12 +148,6 @@ int process_event(){
     al_wait_for_event(event_queue, &event);
 
     // Our setting for controlling animation
-    if(event.timer.source == timer){
-        ture_1 = !ture_1 ;
-    }
-    if(event.timer.source == timer2){
-        ture_2 = !ture_2 ;
-    }
     if(event.timer.source == timerWeapon){
         ture_Weapon = !ture_Weapon ;
         
@@ -287,14 +279,8 @@ int game_run() {
                         reset();
                         
                         //Initialize Timer
-                        timer  = al_create_timer(1.0/5.0);
-                        timer2  = al_create_timer(1.0/5.0);
-                        timerWeapon = al_create_timer(1.0/5.0);
-                        al_register_event_source(event_queue, al_get_timer_event_source(timer)) ;
-                        al_register_event_source(event_queue, al_get_timer_event_source(timer2)) ;
-                        al_register_event_source(event_queue, al_get_timer_event_source(timerWeapon)) ;
-                        al_start_timer(timer);
-                        al_start_timer(timer2);
+                        timerWeapon = al_create_timer(1.0/10.0);
+                        al_register_event_source(event_queue, al_get_timer_event_source(timerWeapon));
                         al_start_timer(timerWeapon);
                         break;
                     case 3:
@@ -330,16 +316,18 @@ int game_run() {
             else {
                 // Change Image for animation
                 al_draw_bitmap(background, 0, 0, 0);
-                if(ture_1)al_draw_bitmap(character1.image_path, character1.x, character1.y, 0);
-                if(ture_2)al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
+                al_draw_bitmap(character1.image_path, character1.x, character1.y, 0);
+                al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
                 
                 // Draw HP bar
                 al_draw_filled_rectangle(10, 10, 10 + character1HP, 20, al_map_rgb(255, 0, 0));
                 al_draw_filled_rectangle(10, 50, 10 + character2HP, 60, al_map_rgb(255, 0, 0));
                 
                 // Draw weapon
-                if(ture_1)al_draw_bitmap(character1Weapon.image_path, character1Weapon.x, character1Weapon.y, 0);
-                if(ture_2)al_draw_bitmap(character2Weapon.image_path, character2Weapon.x, character2Weapon.y, 0);
+                if(ture_Weapon) {
+                    al_draw_bitmap(character1Weapon.image_path, character1Weapon.x, character1Weapon.y, 0);
+                    al_draw_bitmap(character2Weapon.image_path, character2Weapon.x, character2Weapon.y, 0);
+                }
                 
                 al_flip_display();
                 al_clear_to_color(al_map_rgb(0,0,0));
@@ -394,8 +382,7 @@ void game_destroy() {
     // Make sure you destroy all things
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
-    al_destroy_timer(timer);
-    al_destroy_timer(timer2);
+    al_destroy_timer(timerWeapon);
     al_destroy_bitmap(image);
     al_destroy_sample(song);
 }
