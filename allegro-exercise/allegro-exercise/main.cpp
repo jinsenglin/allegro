@@ -19,6 +19,7 @@ ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_KEYBOARD_STATE keyState ;
 ALLEGRO_TIMER *timer = NULL;
 ALLEGRO_TIMER *timer2 = NULL;
+ALLEGRO_TIMER *timerWeapon = NULL;
 ALLEGRO_SAMPLE *song=NULL;
 ALLEGRO_FONT *font = NULL;
 
@@ -43,6 +44,10 @@ Character character1Weapon;
 Character character2Weapon;
 Character character3Weapon;
 
+bool character1WeaponFlying = false;
+bool character2WeaponFlying = false;
+bool character3WeaponFlying = false;
+
 int character1HP = 100;
 int character2HP = 100;
 int character3HP = 100;
@@ -54,7 +59,7 @@ int done = 0;
 int window = 1;
 bool judge_next_window = false;
 int next_window = 2;
-bool ture_1 , ture_2;
+bool ture_1 , ture_2, ture_Weapon;
 
 void show_err_msg(int msg);
 void game_init();
@@ -156,6 +161,12 @@ int process_event(){
     if(event.timer.source == timer2){
         ture_2 = !ture_2 ;
     }
+    if(event.timer.source == timerWeapon){
+        ture_Weapon = !ture_Weapon ;
+        
+        if (character1WeaponFlying) character1Weapon.x += 32;
+        if (character2WeaponFlying) character2Weapon.x -= 32;
+    }
 
     // Keyboard
     if(event.type == ALLEGRO_EVENT_KEY_UP)
@@ -180,6 +191,9 @@ int process_event(){
                 character1.x += 30;
                 character1Weapon.x = character1.x;
                 break;
+            case ALLEGRO_KEY_X:
+                if (!character1WeaponFlying) character1WeaponFlying = true;
+                break;
 
             // P2 control
             case ALLEGRO_KEY_UP:
@@ -198,6 +212,9 @@ int process_event(){
             case ALLEGRO_KEY_LEFT:
                 character2.x -= 30;
                 character2Weapon.x = character2.x;
+                break;
+            case ALLEGRO_KEY_Y:
+                if (!character2WeaponFlying) character2WeaponFlying = true;
                 break;
 
             // For Start Menu
@@ -256,10 +273,13 @@ int game_run() {
                         //Initialize Timer
                         timer  = al_create_timer(1.0);
                         timer2  = al_create_timer(1.0/3.0);
+                        timerWeapon = al_create_timer(1.0);
                         al_register_event_source(event_queue, al_get_timer_event_source(timer)) ;
                         al_register_event_source(event_queue, al_get_timer_event_source(timer2)) ;
+                        al_register_event_source(event_queue, al_get_timer_event_source(timerWeapon)) ;
                         al_start_timer(timer);
                         al_start_timer(timer2);
+                        al_start_timer(timerWeapon);
                         break;
                     case 3:
                         // Change Menu
@@ -294,7 +314,6 @@ int game_run() {
         // Draw weapon
         if(ture_1)al_draw_bitmap(character1Weapon.image_path, character1Weapon.x, character1Weapon.y, 0);
         if(ture_2)al_draw_bitmap(character2Weapon.image_path, character2Weapon.x, character2Weapon.y, 0);
-        else al_draw_bitmap(character3Weapon.image_path, character2Weapon.x, character2Weapon.y, 0);
         
         al_flip_display();
         al_clear_to_color(al_map_rgb(0,0,0));
