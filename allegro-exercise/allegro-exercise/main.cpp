@@ -69,6 +69,8 @@ void display_window1();
 void display_window3();
 void display_window4();
 void setup_characters();
+void create_and_play_music2();
+void stop_and_destroy_music2();
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -134,11 +136,6 @@ void game_begin() {
     // Load sound
     song = al_load_sample( "hello.wav" );
     if (!song){
-        printf( "Audio clip sample not loaded!\n" );
-        show_err_msg(-1);
-    }
-    songFight = al_load_sample( "fight.wav" );
-    if (!songFight){
         printf( "Audio clip sample not loaded!\n" );
         show_err_msg(-1);
     }
@@ -302,7 +299,7 @@ int game_run() {
                     case 2:
                         // Change Music
                         al_destroy_sample(song);
-                        al_play_sample(songFight, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
+                        create_and_play_music2();
                         
                         // Setup Characters
                         setup_characters();
@@ -341,6 +338,7 @@ int game_run() {
                 
                 judge_next_window = true;
                 next_window = 4;
+                stop_and_destroy_music2();
             }
             else {
                 // Change Image for animation
@@ -390,8 +388,8 @@ int game_run() {
             judge_next_window = false;
             switch (next_window) {
                 case 2:
-                    //display_window2();
                     setup_characters();
+                    create_and_play_music2();
                     break;
                 default:
                     break;
@@ -413,8 +411,8 @@ void game_destroy() {
     al_destroy_display(display);
     al_destroy_timer(timerWeapon);
     al_destroy_bitmap(image);
-    if (window == 2 || window == 4) al_destroy_sample(songFight);
-    else al_destroy_sample(song);
+    if (window == 2) al_destroy_sample(songFight);
+    else if (window == 1 || window == 3) al_destroy_sample(song);
 }
 
 void display_window1() {
@@ -484,4 +482,17 @@ void setup_characters() {
     character2Weapon.x = character2.x + 50;
     character2Weapon.y = character2.y + 50;
     character2Weapon.image_path = al_load_bitmap("dart.png");
+}
+
+void create_and_play_music2() {
+    songFight = al_load_sample( "fight.wav" );
+    if (!songFight){
+        printf( "Audio clip sample not loaded!\n" );
+        show_err_msg(-1);
+    }
+    al_play_sample(songFight, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
+}
+
+void stop_and_destroy_music2() {
+    al_destroy_sample(songFight);
 }
