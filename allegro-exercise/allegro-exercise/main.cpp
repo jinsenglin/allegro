@@ -67,6 +67,8 @@ void game_begin();
 int process_event();
 int game_run();
 void game_destroy();
+void display_window1();
+void display_window3();
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -137,16 +139,8 @@ void game_begin() {
     }
     // Loop the song until the display closes
     al_play_sample(song, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
-    al_clear_to_color(al_map_rgb(100,100,100));
-    // Load and draw text
-    font = al_load_ttf_font("pirulen.ttf",12,0);
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to start");
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press '1' to about");
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to exit");
-    al_draw_rectangle(200, 410, 600, 450, al_map_rgb(255, 255, 255), 0);
-    al_draw_rectangle(200, 460, 600, 500, al_map_rgb(255, 255, 255), 0);
-    al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
-    al_flip_display();
+    
+    display_window1();
 }
 
 int process_event(){
@@ -235,19 +229,34 @@ int process_event(){
                 if (!character2WeaponFlying) character2WeaponFlying = true;
                 break;
 
-            // For Start Menu
+            // For Start or Return Menu
             case ALLEGRO_KEY_ENTER:
                 judge_next_window = true;
+                switch (window) {
+                    case 1:
+                        // Start
+                        next_window = 2;
+                        break;
+                    case 3:
+                        // Return
+                        next_window = 1;
+                        break;
+                    default:
+                        break;
+                }
                 break;
                 
             // For Exit Menu
             case ALLEGRO_KEY_ESCAPE:
-                return GAME_TERMINATE;
+                if (window == 1) return GAME_TERMINATE;
+                break;
                 
             // For About Menu
             case ALLEGRO_KEY_1:
-                judge_next_window = true;
-                next_window = 3;
+                if (window == 1) {
+                    judge_next_window = true;
+                    next_window = 3;
+                }
                 break;
         }
     }
@@ -300,16 +309,7 @@ int game_run() {
                         al_start_timer(timerWeapon);
                         break;
                     case 3:
-                        // Change Menu
-                        al_clear_to_color(al_map_rgb(100,100,100));
-                        // Load and draw text
-                        font = al_load_ttf_font("pirulen.ttf",12,0);
-                        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+20 , ALLEGRO_ALIGN_CENTRE, "About");
-                        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Author: 1061044s");
-                        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to exit");
-                        al_draw_rectangle(200, 250, 600, 450, al_map_rgb(255, 255, 255), 0);
-                        al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
-                        al_flip_display();
+                        display_window3();
                         break;
                     default:
                         break;
@@ -342,9 +342,18 @@ int game_run() {
         }
     }
     else if (window == 3){
-        // Listening for new event
         if (!al_is_event_queue_empty(event_queue)) {
             error = process_event();
+            if(judge_next_window) {
+                window = next_window;
+                switch (next_window) {
+                    case 1:
+                        display_window1();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
     return error;
@@ -358,4 +367,33 @@ void game_destroy() {
     al_destroy_timer(timer2);
     al_destroy_bitmap(image);
     al_destroy_sample(song);
+}
+
+void display_window1() {
+    // Clear
+    al_clear_to_color(al_map_rgb(100,100,100));
+    
+    // Load and draw text
+    font = al_load_ttf_font("pirulen.ttf",12,0);
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to start");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press '1' to about");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to exit");
+    al_draw_rectangle(200, 410, 600, 450, al_map_rgb(255, 255, 255), 0);
+    al_draw_rectangle(200, 460, 600, 500, al_map_rgb(255, 255, 255), 0);
+    al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
+    al_flip_display();
+}
+
+void display_window3() {
+    // Clear
+    al_clear_to_color(al_map_rgb(100,100,100));
+    
+    // Load and draw text
+    font = al_load_ttf_font("pirulen.ttf",12,0);
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+20 , ALLEGRO_ALIGN_CENTRE, "About");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Author: 1061044s");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to return");
+    al_draw_rectangle(200, 250, 600, 450, al_map_rgb(255, 255, 255), 0);
+    al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
+    al_flip_display();
 }
