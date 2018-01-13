@@ -152,10 +152,14 @@ int process_event(){
         ture_Weapon = !ture_Weapon ;
         
         if (character1WeaponFlying) {
-            character1Weapon.x += 64;
+            if (character1Weapon.x + 64 < WIDTH) character1Weapon.x += 64;
+            else {
+                character1WeaponFlying = false;
+                character1Weapon.x = character1.x;
+            }
             
             // Object Collision Detection
-            if (character1Weapon.x - character2.x > 0 ) {
+            if (character1Weapon.x >= character2.x && character1Weapon.x <= character2.x + 100 && character1Weapon.y >= character2.y && character1Weapon.y <= character2.y + 100) {
                 character2HP -= 50;
                 
                 character1WeaponFlying = false;
@@ -163,10 +167,14 @@ int process_event(){
             }
         }
         if (character2WeaponFlying) {
-            character2Weapon.x -= 64;
+            if (character2Weapon.x - 64 > 0) character2Weapon.x -= 64;
+            else {
+                character2WeaponFlying = false;
+                character2Weapon.x = character2.x;
+            }
             
             // Object Collision Detection
-            if (character2Weapon.x - character1.x < 0 ) {
+            if (character2Weapon.x >= character1.x && character2Weapon.x <= character1.x + 100 && character2Weapon.y >= character1.y && character2Weapon.y <= character1.y + 100) {
                 character1HP -= 50;
                 
                 character2WeaponFlying = false;
