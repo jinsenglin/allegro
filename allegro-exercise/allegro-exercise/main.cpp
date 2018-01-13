@@ -19,6 +19,7 @@ ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_KEYBOARD_STATE keyState ;
 ALLEGRO_TIMER *timerWeapon = NULL;
 ALLEGRO_SAMPLE *song=NULL;
+ALLEGRO_SAMPLE *songFight=NULL;
 ALLEGRO_FONT *font = NULL;
 
 //Custom Definition
@@ -136,9 +137,16 @@ void game_begin() {
         printf( "Audio clip sample not loaded!\n" );
         show_err_msg(-1);
     }
+    songFight = al_load_sample( "hello.wav" );
+    if (!songFight){
+        printf( "Audio clip sample not loaded!\n" );
+        show_err_msg(-1);
+    }
+    
     // Loop the song until the display closes
     al_play_sample(song, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
     
+    // Display window #1
     display_window1();
 }
 
@@ -292,6 +300,11 @@ int game_run() {
                 judge_next_window = false;
                 switch (next_window) {
                     case 2:
+                        // Change Music
+                        al_destroy_sample(song);
+                        al_play_sample(songFight, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
+                        
+                        // Setup Characters
                         reset();
                         
                         //Initialize Timer
