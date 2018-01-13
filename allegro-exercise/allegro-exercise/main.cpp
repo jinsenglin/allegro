@@ -52,6 +52,8 @@ int character1HP = 100;
 int character2HP = 100;
 int character3HP = 100;
 
+int winner = 0;
+
 int imageWidth = 0;
 int imageHeight = 0;
 int draw = 0;
@@ -69,6 +71,7 @@ int game_run();
 void game_destroy();
 void display_window1();
 void display_window3();
+void display_window4();
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -163,7 +166,7 @@ int process_event(){
             
             // Object Collision Detection
             if (character1Weapon.x - character2.x > 0 ) {
-                character2HP -= 10;
+                character2HP -= 100;
                 
                 character1WeaponFlying = false;
                 character1Weapon.x = character1.x;
@@ -174,7 +177,7 @@ int process_event(){
             
             // Object Collision Detection
             if (character2Weapon.x - character1.x < 0 ) {
-                character1HP -= 10;
+                character1HP -= 100;
                 
                 character2WeaponFlying = false;
                 character2Weapon.x = character2.x;
@@ -276,6 +279,7 @@ int game_run() {
             error = process_event();
             if(judge_next_window) {
                 window = next_window;
+                judge_next_window = false;
                 switch (next_window) {
                     case 2:
                         // Setting Character
@@ -319,26 +323,48 @@ int game_run() {
     }
     // Second window(Main Game)
     else if(window == 2){
-        // Change Image for animation
-        al_draw_bitmap(background, 0, 0, 0);
-        if(ture_1)al_draw_bitmap(character1.image_path, character1.x, character1.y, 0);
-        if(ture_2)al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
-        else al_draw_bitmap(character3.image_path, character2.x, character2.y, 0);
-        
-        // Draw HP bar
-        al_draw_filled_rectangle(10, 10, 10 + character1HP, 20, al_map_rgb(255, 0, 0));
-        al_draw_filled_rectangle(10, 50, 10 + character2HP, 60, al_map_rgb(255, 0, 0));
-        
-        // Draw weapon
-        if(ture_1)al_draw_bitmap(character1Weapon.image_path, character1Weapon.x, character1Weapon.y, 0);
-        if(ture_2)al_draw_bitmap(character2Weapon.image_path, character2Weapon.x, character2Weapon.y, 0);
-        
-        al_flip_display();
-        al_clear_to_color(al_map_rgb(0,0,0));
+        if (judge_next_window) {
+            window = next_window;
+            judge_next_window = false;
+            switch (next_window) {
+                case 4:
+                    display_window4();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else {
+            if (character1HP <= 0 || character2HP <=0 ) {
+                if (character1HP <= 0) winner = 2;
+                else winner = 1;
+                
+                judge_next_window = true;
+                next_window = 4;
+            }
+            else {
+                // Change Image for animation
+                al_draw_bitmap(background, 0, 0, 0);
+                if(ture_1)al_draw_bitmap(character1.image_path, character1.x, character1.y, 0);
+                if(ture_2)al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
+                else al_draw_bitmap(character3.image_path, character2.x, character2.y, 0);
+                
+                // Draw HP bar
+                al_draw_filled_rectangle(10, 10, 10 + character1HP, 20, al_map_rgb(255, 0, 0));
+                al_draw_filled_rectangle(10, 50, 10 + character2HP, 60, al_map_rgb(255, 0, 0));
+                
+                // Draw weapon
+                if(ture_1)al_draw_bitmap(character1Weapon.image_path, character1Weapon.x, character1Weapon.y, 0);
+                if(ture_2)al_draw_bitmap(character2Weapon.image_path, character2Weapon.x, character2Weapon.y, 0);
+                
+                al_flip_display();
+                al_clear_to_color(al_map_rgb(0,0,0));
 
-        // Listening for new event
-        if (!al_is_event_queue_empty(event_queue)) {
-            error = process_event();
+                // Listening for new event
+                if (!al_is_event_queue_empty(event_queue)) {
+                    error = process_event();
+                }
+            }
         }
     }
     else if (window == 3){
@@ -346,6 +372,23 @@ int game_run() {
             error = process_event();
             if(judge_next_window) {
                 window = next_window;
+                judge_next_window = false;
+                switch (next_window) {
+                    case 1:
+                        display_window1();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+    else if (window == 4){
+        if (!al_is_event_queue_empty(event_queue)) {
+            error = process_event();
+            if(judge_next_window) {
+                window = next_window;
+                judge_next_window = false;
                 switch (next_window) {
                     case 1:
                         display_window1();
@@ -393,6 +436,21 @@ void display_window3() {
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+20 , ALLEGRO_ALIGN_CENTRE, "About");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Author: 1061044s");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to return");
+    al_draw_rectangle(200, 250, 600, 450, al_map_rgb(255, 255, 255), 0);
+    al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
+    al_flip_display();
+}
+
+void display_window4() {
+    // Clear
+    al_clear_to_color(al_map_rgb(100,100,100));
+    
+    // Load and draw text
+    font = al_load_ttf_font("pirulen.ttf",12,0);
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+20 , ALLEGRO_ALIGN_CENTRE, "Game Over");
+    if (winner == 1) al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Winner: P1");
+    else al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Winner: P2");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to restart");
     al_draw_rectangle(200, 250, 600, 450, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
     al_flip_display();
