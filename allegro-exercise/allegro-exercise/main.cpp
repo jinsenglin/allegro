@@ -205,7 +205,6 @@ int process_event(){
             case ALLEGRO_KEY_A:
                 character1.x -= 30;
                 character1Weapon.x = character1.x;
-                character1HP -= 10;
                 break;
             case ALLEGRO_KEY_D:
                 character1.x += 30;
@@ -227,7 +226,6 @@ int process_event(){
             case ALLEGRO_KEY_RIGHT:
                 character2.x += 30;
                 character2Weapon.x = character2.x;
-                character2HP -= 10;
                 break;
             case ALLEGRO_KEY_LEFT:
                 character2.x -= 30;
@@ -284,7 +282,7 @@ int game_run() {
                         // Setting Character's Weapon
                         character1Weapon.x = character1.x;
                         character1Weapon.y = character1.y;
-                        character1Weapon.image_path = al_load_bitmap("dart.png");
+                        character1Weapon.image_path = al_load_bitmap("fireball.png");
                         character2Weapon.x = character2.x;
                         character2Weapon.y = character2.y;
                         character2Weapon.image_path = al_load_bitmap("dart.png");
