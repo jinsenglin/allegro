@@ -164,7 +164,7 @@ int process_event(){
             
             // Object Collision Detection
             if (character1Weapon.x - character2.x > 0 ) {
-                character2HP -= 100;
+                character2HP -= 50;
                 
                 character1WeaponFlying = false;
                 character1Weapon.x = character1.x;
@@ -175,7 +175,7 @@ int process_event(){
             
             // Object Collision Detection
             if (character2Weapon.x - character1.x < 0 ) {
-                character1HP -= 100;
+                character1HP -= 50;
                 
                 character2WeaponFlying = false;
                 character2Weapon.x = character2.x;
