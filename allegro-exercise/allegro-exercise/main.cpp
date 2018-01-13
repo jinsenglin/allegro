@@ -163,7 +163,7 @@ int process_event(){
             
             // Object Collision Detection
             if (character1Weapon.x >= character2.x && character1Weapon.x <= character2.x + 100 && character1Weapon.y >= character2.y && character1Weapon.y <= character2.y + 100) {
-                character2HP -= 50;
+                character2HP -= 25;
                 
                 character1WeaponFlying = false;
                 character1Weapon.x = character1.x + 50;
@@ -182,7 +182,7 @@ int process_event(){
             
             // Object Collision Detection
             if (character2Weapon.x >= character1.x && character2Weapon.x <= character1.x + 100 && character2Weapon.y >= character1.y && character2Weapon.y <= character1.y + 100) {
-                character1HP -= 50;
+                character1HP -= 25;
                 
                 character2WeaponFlying = false;
                 character2Weapon.x = character2.x + 50;
