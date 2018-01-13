@@ -164,8 +164,28 @@ int process_event(){
     if(event.timer.source == timerWeapon){
         ture_Weapon = !ture_Weapon ;
         
-        if (character1WeaponFlying) character1Weapon.x += 32;
-        if (character2WeaponFlying) character2Weapon.x -= 32;
+        if (character1WeaponFlying) {
+            character1Weapon.x += 32;
+            
+            // Object Collision Detection
+            if (character1Weapon.x - character2.x > 0 ) {
+                character2HP -= 10;
+                
+                character1WeaponFlying = false;
+                character1Weapon.x = character1.x;
+            }
+        }
+        if (character2WeaponFlying) {
+            character2Weapon.x -= 32;
+            
+            // Object Collision Detection
+            if (character2Weapon.x - character1.x < 0 ) {
+                character1HP -= 10;
+                
+                character2WeaponFlying = false;
+                character2Weapon.x = character2.x;
+            }
+        }
     }
 
     // Keyboard
