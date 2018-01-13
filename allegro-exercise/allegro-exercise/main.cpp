@@ -54,7 +54,7 @@ int imageWidth = 0;
 int imageHeight = 0;
 int draw = 0;
 int done = 0;
-int window = 1;
+int window = 0;
 bool judge_next_window = false;
 int next_window = 2;
 bool ture_1 , ture_2, ture_Weapon;
@@ -65,12 +65,14 @@ void game_begin();
 int process_event();
 int game_run();
 void game_destroy();
+void display_window0();
 void display_window1();
 void display_window3();
 void display_window4();
 void setup_characters();
 void create_and_play_music2();
 void stop_and_destroy_music2();
+void start_animation();
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -133,6 +135,12 @@ void game_init() {
 }
 
 void game_begin() {
+    // Display window #0
+    display_window0();
+    
+    al_rest(3);
+    window = 1;
+    
     // Load sound
     song = al_load_sample( "hello.wav" );
     if (!song){
@@ -413,6 +421,16 @@ void game_destroy() {
     al_destroy_bitmap(image);
     if (window == 2) al_destroy_sample(songFight);
     else if (window == 1 || window == 3) al_destroy_sample(song);
+}
+
+void display_window0() {
+    // Clear
+    al_clear_to_color(al_map_rgb(0,0,0));
+    
+    // Load and draw text
+    font = al_load_ttf_font("pirulen.ttf",50,0);
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2 , ALLEGRO_ALIGN_CENTRE, "Hello");
+    al_flip_display();
 }
 
 void display_window1() {
