@@ -68,7 +68,7 @@ void game_destroy();
 void display_window1();
 void display_window3();
 void display_window4();
-void reset();
+void setup_characters();
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -305,7 +305,7 @@ int game_run() {
                         al_play_sample(songFight, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
                         
                         // Setup Characters
-                        reset();
+                        setup_characters();
                         
                         //Initialize Timer
                         timerWeapon = al_create_timer(1.0/10.0);
@@ -391,7 +391,7 @@ int game_run() {
             switch (next_window) {
                 case 2:
                     //display_window2();
-                    reset();
+                    setup_characters();
                     break;
                 default:
                     break;
@@ -463,7 +463,7 @@ void display_window4() {
     al_flip_display();
 }
 
-void reset() {
+void setup_characters() {
     // Setting Character
     character1.x = WIDTH / 2 - 300;
     character1.y = HEIGHT / 2 + 75;
