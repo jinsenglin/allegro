@@ -244,6 +244,10 @@ int process_event(){
                         // Return
                         next_window = 1;
                         break;
+                    case 4:
+                        next_window = 2;
+                        // Restart
+                        break;
                     default:
                         break;
                 }
@@ -251,7 +255,7 @@ int process_event(){
                 
             // For Exit Menu
             case ALLEGRO_KEY_ESCAPE:
-                if (window == 1) return GAME_TERMINATE;
+                if (window == 1 || window == 4) return GAME_TERMINATE;
                 break;
                 
             // For About Menu
@@ -390,8 +394,8 @@ int game_run() {
                 window = next_window;
                 judge_next_window = false;
                 switch (next_window) {
-                    case 1:
-                        display_window1();
+                    case 2:
+                        //display_window2();
                         break;
                     default:
                         break;
@@ -450,8 +454,10 @@ void display_window4() {
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+20 , ALLEGRO_ALIGN_CENTRE, "Game Over");
     if (winner == 1) al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Winner: P1");
     else al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Winner: P2");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to end");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to restart");
     al_draw_rectangle(200, 250, 600, 450, al_map_rgb(255, 255, 255), 0);
+    al_draw_rectangle(200, 460, 600, 500, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
     al_flip_display();
 }
