@@ -183,19 +183,19 @@ int process_event(){
             // P1 control
             case ALLEGRO_KEY_W:
                 if (character1.y - 30 >= 0) character1.y -= 30;
-                character1Weapon.y = character1.y;
+                character1Weapon.y = character1.y + 50;
                 break;
             case ALLEGRO_KEY_S:
                 if (character1.y + 30 <= HEIGHT-100) character1.y += 30;
-                character1Weapon.y = character1.y;
+                character1Weapon.y = character1.y + 50;
                 break;
             case ALLEGRO_KEY_A:
                 if (character1.x - 30 >= 0) character1.x -= 30;
-                character1Weapon.x = character1.x;
+                character1Weapon.x = character1.x + 50;
                 break;
             case ALLEGRO_KEY_D:
                 if (character1.x + 30 <= WIDTH-100) character1.x += 30;
-                character1Weapon.x = character1.x;
+                character1Weapon.x = character1.x + 50;
                 break;
             case ALLEGRO_KEY_X:
                 if (!character1WeaponFlying) character1WeaponFlying = true;
@@ -204,19 +204,19 @@ int process_event(){
             // P2 control
             case ALLEGRO_KEY_UP:
                 if (character2.y - 30 >= 0) character2.y -= 30;
-                character2Weapon.y = character2.y;
+                character2Weapon.y = character2.y + 50;
                 break;
             case ALLEGRO_KEY_DOWN:
                 if (character2.y + 30 <= HEIGHT-100) character2.y += 30;
-                character2Weapon.y = character2.y;
+                character2Weapon.y = character2.y + 50;
                 break;
             case ALLEGRO_KEY_RIGHT:
                 if (character2.x + 30 <= WIDTH-100) character2.x += 30;
-                character2Weapon.x = character2.x;
+                character2Weapon.x = character2.x + 50;
                 break;
             case ALLEGRO_KEY_LEFT:
                 if (character2.x - 30 >= 0) character2.x -= 30;
-                character2Weapon.x = character2.x;
+                character2Weapon.x = character2.x + 50;
                 break;
             case ALLEGRO_KEY_Y:
                 if (!character2WeaponFlying) character2WeaponFlying = true;
@@ -448,10 +448,10 @@ void reset() {
     character2HP = 100;
     
     // Setting Character's Weapon
-    character1Weapon.x = character1.x;
-    character1Weapon.y = character1.y;
+    character1Weapon.x = character1.x + 50;
+    character1Weapon.y = character1.y + 50;
     character1Weapon.image_path = al_load_bitmap("fireball.png");
-    character2Weapon.x = character2.x;
-    character2Weapon.y = character2.y;
+    character2Weapon.x = character2.x + 50;
+    character2Weapon.y = character2.y + 50;
     character2Weapon.image_path = al_load_bitmap("dart.png");
 }
