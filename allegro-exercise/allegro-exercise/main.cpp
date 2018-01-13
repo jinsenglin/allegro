@@ -23,7 +23,7 @@ ALLEGRO_SAMPLE *song=NULL;
 ALLEGRO_FONT *font = NULL;
 
 //Custom Definition
-const char *title = "Final Project 10xxxxxxx";
+const char *title = "Final Project 1061044s";
 const float FPS = 60;
 const int WIDTH = 800;
 const int HEIGHT = 600;
@@ -38,6 +38,10 @@ typedef struct character
 Character character1;
 Character character2;
 Character character3;
+
+int character1HP = 100;
+int character2HP = 100;
+int character3HP = 100;
 
 int imageWidth = 0;
 int imageHeight = 0;
@@ -163,6 +167,7 @@ int process_event(){
                 break;
             case ALLEGRO_KEY_A:
                 character1.x -= 30;
+                character1HP -= 10;
                 break;
             case ALLEGRO_KEY_D:
                 character1.x += 30;
@@ -177,6 +182,7 @@ int process_event(){
                 break;
             case ALLEGRO_KEY_RIGHT:
                 character2.x += 30;
+                character2HP -= 10;
                 break;
             case ALLEGRO_KEY_LEFT:
                 character2.x -= 30;
@@ -259,6 +265,11 @@ int game_run() {
         if(ture_1)al_draw_bitmap(character1.image_path, character1.x, character1.y, 0);
         if(ture_2)al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
         else al_draw_bitmap(character3.image_path, character2.x, character2.y, 0);
+        
+        // Re-draw HP bar
+        al_draw_filled_rectangle(10, 10, 10 + character1HP, 20, al_map_rgb(255, 0, 0));
+        al_draw_filled_rectangle(10, 50, 10 + character2HP, 60, al_map_rgb(255, 0, 0));
+        
         al_flip_display();
         al_clear_to_color(al_map_rgb(0,0,0));
 
