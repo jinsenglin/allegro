@@ -65,7 +65,7 @@ void game_begin();
 int process_event();
 int game_run();
 void game_destroy();
-void display_window0();
+void display_window0(int, int);
 void display_window1();
 void display_window3();
 void display_window4();
@@ -130,8 +130,18 @@ void game_init() {
     al_init_ttf_addon();
 
     // Display window #0
-    display_window0();
-    al_rest(3);
+    display_window0(0, 255);
+    al_rest(0.5);
+    display_window0(0, 0);
+    al_rest(0.5);
+    display_window0(0, 255);
+    al_rest(0.5);
+    display_window0(0, 0);
+    al_rest(0.5);
+    display_window0(0, 255);
+    al_rest(0.5);
+    display_window0(0, 0);
+    al_rest(1);
     window = 1;
     
     // Register event
@@ -139,7 +149,7 @@ void game_init() {
     al_register_event_source(event_queue, al_get_keyboard_event_source());
 }
 
-void game_begin() {    
+void game_begin() {
     // Load sound
     song = al_load_sample( "hello.wav" );
     if (!song){
@@ -422,13 +432,13 @@ void game_destroy() {
     else if (window == 1 || window == 3) al_destroy_sample(song);
 }
 
-void display_window0() {
+void display_window0(int bg_color, int font_color) {
     // Clear
-    al_clear_to_color(al_map_rgb(0,0,0));
+    al_clear_to_color(al_map_rgb(bg_color, bg_color, bg_color));
     
     // Load and draw text
     font = al_load_ttf_font("pirulen.ttf",50,0);
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2 , ALLEGRO_ALIGN_CENTRE, "Hello");
+    al_draw_text(font, al_map_rgb(font_color, font_color, font_color), WIDTH/2, HEIGHT/2 , ALLEGRO_ALIGN_CENTRE, "Allegro");
     al_flip_display();
 }
 
