@@ -160,7 +160,7 @@ int process_event(){
         ture_Weapon = !ture_Weapon ;
         
         if (character1WeaponFlying) {
-            character1Weapon.x += 32;
+            character1Weapon.x += 64;
             
             // Object Collision Detection
             if (character1Weapon.x - character2.x > 0 ) {
@@ -171,7 +171,7 @@ int process_event(){
             }
         }
         if (character2WeaponFlying) {
-            character2Weapon.x -= 32;
+            character2Weapon.x -= 64;
             
             // Object Collision Detection
             if (character2Weapon.x - character1.x < 0 ) {
@@ -285,30 +285,11 @@ int game_run() {
                 switch (next_window) {
                     case 2:
                         reset();
-                        /*
-                        // Setting Character
-                        character1.x = WIDTH / 2 - 300;
-                        character1.y = HEIGHT / 2 + 75;
-                        character2.x = WIDTH / 2 + 170;
-                        character2.y = HEIGHT / 2 + 100;
-                        character1.image_path = al_load_bitmap("maokai.png");
-                        character2.image_path= al_load_bitmap("teemo.png");
-                        character3.image_path = al_load_bitmap("Azir.png");
-                        background = al_load_bitmap("stage.jpg");
-                        
-                        // Setting Character's Weapon
-                        character1Weapon.x = character1.x;
-                        character1Weapon.y = character1.y;
-                        character1Weapon.image_path = al_load_bitmap("fireball.png");
-                        character2Weapon.x = character2.x;
-                        character2Weapon.y = character2.y;
-                        character2Weapon.image_path = al_load_bitmap("dart.png");
-                        character3Weapon.image_path = al_load_bitmap("dart.png");*/
                         
                         //Initialize Timer
-                        timer  = al_create_timer(1.0);
-                        timer2  = al_create_timer(1.0/3.0);
-                        timerWeapon = al_create_timer(1.0);
+                        timer  = al_create_timer(1.0/5.0);
+                        timer2  = al_create_timer(1.0/5.0);
+                        timerWeapon = al_create_timer(1.0/5.0);
                         al_register_event_source(event_queue, al_get_timer_event_source(timer)) ;
                         al_register_event_source(event_queue, al_get_timer_event_source(timer2)) ;
                         al_register_event_source(event_queue, al_get_timer_event_source(timerWeapon)) ;
