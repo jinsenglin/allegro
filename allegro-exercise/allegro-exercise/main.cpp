@@ -137,14 +137,14 @@ void game_begin() {
         printf( "Audio clip sample not loaded!\n" );
         show_err_msg(-1);
     }
-    songFight = al_load_sample( "hello.wav" );
+    songFight = al_load_sample( "fight.wav" );
     if (!songFight){
         printf( "Audio clip sample not loaded!\n" );
         show_err_msg(-1);
     }
     
     // Loop the song until the display closes
-    al_play_sample(song, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
+    al_play_sample(song, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
     
     // Display window #1
     display_window1();
@@ -413,7 +413,8 @@ void game_destroy() {
     al_destroy_display(display);
     al_destroy_timer(timerWeapon);
     al_destroy_bitmap(image);
-    al_destroy_sample(song);
+    if (window == 2 || window == 4) al_destroy_sample(songFight);
+    else al_destroy_sample(song);
 }
 
 void display_window1() {
