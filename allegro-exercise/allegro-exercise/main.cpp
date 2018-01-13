@@ -45,6 +45,7 @@ int draw = 0;
 int done = 0;
 int window = 1;
 bool judge_next_window = false;
+int next_window = 2;
 bool ture_1 , ture_2;
 
 void show_err_msg(int msg);
@@ -189,6 +190,12 @@ int process_event(){
             // For Exit Menu
             case ALLEGRO_KEY_ESCAPE:
                 return GAME_TERMINATE;
+                
+            // For About Menu
+            case ALLEGRO_KEY_1:
+                judge_next_window = true;
+                next_window = 3;
+                break;
         }
     }
 
@@ -206,37 +213,61 @@ int game_run() {
         if (!al_is_event_queue_empty(event_queue)) {
             error = process_event();
             if(judge_next_window) {
-                window = 2;
-                // Setting Character
-                character1.x = WIDTH / 2 - 300;
-                character1.y = HEIGHT / 2 + 75;
-                character2.x = WIDTH / 2 + 170;
-                character2.y = HEIGHT / 2 + 100;
-                character1.image_path = al_load_bitmap("maokai.png");
-                character2.image_path= al_load_bitmap("teemo.png");
-                character3.image_path = al_load_bitmap("Azir.png");
-                background = al_load_bitmap("stage.jpg");
-
-                //Initialize Timer
-                timer  = al_create_timer(1.0);
-                timer2  = al_create_timer(1.0/3.0);
-                al_register_event_source(event_queue, al_get_timer_event_source(timer)) ;
-                al_register_event_source(event_queue, al_get_timer_event_source(timer2)) ;
-                al_start_timer(timer);
-                al_start_timer(timer2);
+                window = next_window;
+                switch (next_window) {
+                    case 2:
+                        // Setting Character
+                        character1.x = WIDTH / 2 - 300;
+                        character1.y = HEIGHT / 2 + 75;
+                        character2.x = WIDTH / 2 + 170;
+                        character2.y = HEIGHT / 2 + 100;
+                        character1.image_path = al_load_bitmap("maokai.png");
+                        character2.image_path= al_load_bitmap("teemo.png");
+                        character3.image_path = al_load_bitmap("Azir.png");
+                        background = al_load_bitmap("stage.jpg");
+                        
+                        //Initialize Timer
+                        timer  = al_create_timer(1.0);
+                        timer2  = al_create_timer(1.0/3.0);
+                        al_register_event_source(event_queue, al_get_timer_event_source(timer)) ;
+                        al_register_event_source(event_queue, al_get_timer_event_source(timer2)) ;
+                        al_start_timer(timer);
+                        al_start_timer(timer2);
+                        break;
+                    case 3:
+                        // Change Menu
+                        al_clear_to_color(al_map_rgb(100,100,100));
+                        // Load and draw text
+                        font = al_load_ttf_font("pirulen.ttf",12,0);
+                        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+20 , ALLEGRO_ALIGN_CENTRE, "About");
+                        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Author: 1061044s");
+                        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to exit");
+                        al_draw_rectangle(200, 250, 600, 450, al_map_rgb(255, 255, 255), 0);
+                        al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
+                        al_flip_display();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
     // Second window(Main Game)
     else if(window == 2){
         // Change Image for animation
-        al_draw_bitmap(background, 0,0, 0);
+        al_draw_bitmap(background, 0, 0, 0);
         if(ture_1)al_draw_bitmap(character1.image_path, character1.x, character1.y, 0);
         if(ture_2)al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
         else al_draw_bitmap(character3.image_path, character2.x, character2.y, 0);
         al_flip_display();
         al_clear_to_color(al_map_rgb(0,0,0));
 
+        // Listening for new event
+        if (!al_is_event_queue_empty(event_queue)) {
+            error = process_event();
+        }
+    }
+    else if (window == 3){
         // Listening for new event
         if (!al_is_event_queue_empty(event_queue)) {
             error = process_event();
