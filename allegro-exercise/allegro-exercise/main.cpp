@@ -389,8 +389,11 @@ int process_event(){
                 }
                 break;
             case ALLEGRO_KEY_2:
-                // choose character 1P
-                if (window == 5) {
+                if (window == 1) {
+                    judge_next_window = true;
+                    next_window = 5;
+                }
+                else if (window == 5) {
                     if (char_1p_choosen) {
                         character2.image_path = al_load_bitmap(img2_location);
                         character2Weapon.image_path = al_load_bitmap(weapon2_location);
@@ -406,7 +409,6 @@ int process_event(){
                 }
                 break;
             case ALLEGRO_KEY_3:
-                // choose character 1P
                 if (window == 5) {
                     if (char_1p_choosen) {
                         character2.image_path = al_load_bitmap(img3_location);
@@ -420,13 +422,6 @@ int process_event(){
                         char_1p_choosen = true;
                         display_window5();
                     }
-                }
-                break;
-                // For choose character
-            case ALLEGRO_KEY_C:
-                if (window == 1) {
-                    judge_next_window = true;
-                    next_window = 5;
                 }
                 break;
         }
@@ -610,8 +605,8 @@ void display_window1() {
     
     // Load and draw text
     font = al_load_ttf_font("pirulen.ttf",12,0);
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Press 'c' to choose character");
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120 , ALLEGRO_ALIGN_CENTRE, "Press '1' to about");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Press '1' to about");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120 , ALLEGRO_ALIGN_CENTRE, "Press '2' to choose character");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to start");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to exit");
     al_draw_rectangle(200, 360, 600, 400, al_map_rgb(255, 255, 255), 0);
