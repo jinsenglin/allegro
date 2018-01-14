@@ -667,19 +667,14 @@ void display_window5() {
     al_draw_bitmap(al_load_bitmap(img2_location), character2.x, character2.y, 0);
     al_draw_bitmap(al_load_bitmap(img3_location), character3.x, character3.y, 0);
     
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, character1.y - 50 , ALLEGRO_ALIGN_CENTRE, "Press 'A' 'D' to move P1. Press 'Left' 'Right' to move P2");
+    
+    al_draw_text(font, al_map_rgb(255,255,255), character1.x + imageWidth/2, character1.y - 5 , ALLEGRO_ALIGN_CENTRE, "P1");
+    al_draw_text(font, al_map_rgb(255,255,255), character2.x + imageWidth/2, character2.y - 5 , ALLEGRO_ALIGN_CENTRE, "P2");
+    
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to return");
     al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
     
-    // Load and draw text
-    if (char_1p_choosen && !char_2p_choosen){
-        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2-20 , ALLEGRO_ALIGN_CENTRE, "Please choose 2P character");
-    }
-    else if (char_2p_choosen){
-        // draw nothing
-    }
-    else {
-        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2-40 , ALLEGRO_ALIGN_CENTRE, "Please choose 1P character");
-    }
     al_flip_display();
 }
 
