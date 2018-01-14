@@ -667,10 +667,17 @@ void display_window5() {
     al_draw_bitmap(al_load_bitmap(img2_location), character2.x, character2.y, 0);
     al_draw_bitmap(al_load_bitmap(img3_location), character3.x, character3.y, 0);
     
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, character1.y - 50 , ALLEGRO_ALIGN_CENTRE, "Press 'A' 'D' to move P1. Press 'Left' 'Right' to move P2");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, character1.y - 50 , ALLEGRO_ALIGN_CENTRE, "Press '1' '2' '3' to change P1. Press '4' '5' '6' to change P2");
     
-    al_draw_text(font, al_map_rgb(255,255,255), character1.x + imageWidth/2, character1.y - 5 , ALLEGRO_ALIGN_CENTRE, "P1");
-    al_draw_text(font, al_map_rgb(255,255,255), character2.x + imageWidth/2, character2.y - 5 , ALLEGRO_ALIGN_CENTRE, "P2");
+    al_draw_text(font, al_map_rgb(0,128,255), character1.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "1");
+    al_draw_text(font, al_map_rgb(255,255,255), character2.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "2");
+    al_draw_text(font, al_map_rgb(255,255,255), character3.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "3");
+    al_draw_text(font, al_map_rgb(255,255,255), character1.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "4");
+    al_draw_text(font, al_map_rgb(0,128,255), character2.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "5");
+    al_draw_text(font, al_map_rgb(255,255,255), character3.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "6");
+    
+    al_draw_text(font, al_map_rgb(255,255,255), character1.x - 10, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "P1");
+    al_draw_text(font, al_map_rgb(255,255,255), character1.x - 10, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "P2");
     
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to return");
     al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
