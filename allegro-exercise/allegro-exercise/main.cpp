@@ -89,6 +89,7 @@ void display_window1();
 void display_window3();
 void display_window4();
 void display_window5();
+void display_window6();
 void setup_characters();
 void create_and_play_music2();
 void stop_and_destroy_music2();
@@ -367,6 +368,10 @@ int process_event(){
                         // Return
                         next_window = 1;
                         break;
+                    case 6:
+                        // Return
+                        next_window = 1;
+                        break;
                     default:
                         break;
                 }
@@ -388,6 +393,10 @@ int process_event(){
                     p1_weapon_img = weapon1_location;
                     display_window5();
                 }
+                else if(window == 6){
+                    clockMode = false;
+                    display_window6();
+                }
                 break;
             case ALLEGRO_KEY_2:
                 if (window == 1) {
@@ -399,9 +408,17 @@ int process_event(){
                     p1_weapon_img = weapon2_location;
                     display_window5();
                 }
+                else if(window == 6){
+                    clockMode = true;
+                    display_window6();
+                }
                 break;
             case ALLEGRO_KEY_3:
-                if (window == 5) {
+                if (window == 1) {
+                    judge_next_window = true;
+                    next_window = 6;
+                }
+                else if (window == 5) {
                     p1_img = img3_location;
                     p1_weapon_img = weapon3_location;
                     display_window5();
@@ -472,6 +489,9 @@ int game_run() {
                         break;
                     case 5:
                         display_window5();
+                        break;
+                    case 6:
+                        display_window6();
                         break;
                     default:
                         break;
@@ -595,6 +615,25 @@ int game_run() {
             }
         }
     }
+    else if (window == 6){
+        if(judge_next_window) {
+            window = next_window;
+            judge_next_window = false;
+            switch (next_window) {
+                case 1:
+                    display_window1();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else {
+            // Listening for new event
+            if (!al_is_event_queue_empty(event_queue)) {
+                error = process_event();
+            }
+        }
+    }
     return error;
 }
 
@@ -626,10 +665,12 @@ void display_window1() {
     
     // Load and draw text
     font = al_load_ttf_font("pirulen.ttf",12,0);
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Press '1' to about");
-    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120 , ALLEGRO_ALIGN_CENTRE, "Press '2' to choose character");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+20 , ALLEGRO_ALIGN_CENTRE, "Press '1' to about");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Press '2' to choose character");
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120 , ALLEGRO_ALIGN_CENTRE, "Press '3' to choose mode");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to start");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to exit");
+    al_draw_rectangle(200, 310, 600, 350, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 360, 600, 400, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 410, 600, 450, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 460, 600, 500, al_map_rgb(255, 255, 255), 0);
@@ -725,6 +766,26 @@ void display_window5() {
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to return");
     al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
     
+    al_flip_display();
+}
+
+void display_window6() {
+    // Clear
+    al_clear_to_color(al_map_rgb(100,100,100));
+    
+    // Load and draw text
+    font = al_load_ttf_font("pirulen.ttf",12,0);
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70, ALLEGRO_ALIGN_CENTRE, "Press '1' '2' to change mode.");
+    if (clockMode) {
+        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120, ALLEGRO_ALIGN_CENTRE, "1. Normal Mode");
+        al_draw_text(font, al_map_rgb(0,128,255), WIDTH/2, HEIGHT/2+170, ALLEGRO_ALIGN_CENTRE, "2. Clock Mode");
+    }
+    else {
+        al_draw_text(font, al_map_rgb(0,128,255), WIDTH/2, HEIGHT/2+120, ALLEGRO_ALIGN_CENTRE, "1. Normal Mode");
+        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170, ALLEGRO_ALIGN_CENTRE, "2. Clock Mode");
+    }
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to return");
+    al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
     al_flip_display();
 }
 
