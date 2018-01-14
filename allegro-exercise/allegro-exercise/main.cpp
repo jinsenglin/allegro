@@ -661,12 +661,37 @@ void display_window5() {
     
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, character1.y - 50 , ALLEGRO_ALIGN_CENTRE, "Press '1' '2' '3' to change P1. Press '4' '5' '6' to change P2");
     
-    al_draw_text(font, al_map_rgb(0,128,255), character1.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "1");
-    al_draw_text(font, al_map_rgb(255,255,255), character2.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "2");
-    al_draw_text(font, al_map_rgb(255,255,255), character3.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "3");
-    al_draw_text(font, al_map_rgb(255,255,255), character1.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "4");
-    al_draw_text(font, al_map_rgb(0,128,255), character2.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "5");
-    al_draw_text(font, al_map_rgb(255,255,255), character3.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "6");
+    if (p1_img == img1_location) {
+        al_draw_text(font, al_map_rgb(0,128,255), character1.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "1");
+        al_draw_text(font, al_map_rgb(255,255,255), character2.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "2");
+        al_draw_text(font, al_map_rgb(255,255,255), character3.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "3");
+    }
+    else if (p1_img == img2_location) {
+        al_draw_text(font, al_map_rgb(255,255,255), character1.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "1");
+        al_draw_text(font, al_map_rgb(0,128,255), character2.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "2");
+        al_draw_text(font, al_map_rgb(255,255,255), character3.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "3");
+    }
+    else {
+        al_draw_text(font, al_map_rgb(255,255,255), character1.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "1");
+        al_draw_text(font, al_map_rgb(255,255,255), character2.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "2");
+        al_draw_text(font, al_map_rgb(0,128,255), character3.x + imageWidth/2, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "3");
+    }
+    
+    if (p2_img == img1_location) {
+        al_draw_text(font, al_map_rgb(0,128,255), character1.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "4");
+        al_draw_text(font, al_map_rgb(255,255,255), character2.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "5");
+        al_draw_text(font, al_map_rgb(255,255,255), character3.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "6");
+    }
+    else if (p2_img == img2_location) {
+        al_draw_text(font, al_map_rgb(255,255,255), character1.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "4");
+        al_draw_text(font, al_map_rgb(0,128,255), character2.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "5");
+        al_draw_text(font, al_map_rgb(255,255,255), character3.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "6");
+    }
+    else {
+        al_draw_text(font, al_map_rgb(255,255,255), character1.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "4");
+        al_draw_text(font, al_map_rgb(255,255,255), character2.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "5");
+        al_draw_text(font, al_map_rgb(0,128,255), character3.x + imageWidth/2, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "6");
+    }
     
     al_draw_text(font, al_map_rgb(255,255,255), character1.x - 10, character1.y - 10 , ALLEGRO_ALIGN_CENTRE, "P1");
     al_draw_text(font, al_map_rgb(255,255,255), character1.x - 10, character1.y + imageHeight + 10 , ALLEGRO_ALIGN_CENTRE, "P2");
