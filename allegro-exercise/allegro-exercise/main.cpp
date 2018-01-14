@@ -379,14 +379,14 @@ int process_event(){
                 }
                 else if (window == 5) {
                     if (char_1p_choosen) {
-                        character2.image_path = al_load_bitmap(img1_location);
-                        character2Weapon.image_path = al_load_bitmap(weapon1_location);
+                        p2_img = img1_location;
+                        p2_weapon_img = weapon1_location;
                         char_2p_choosen = true;
                         display_window5();
                     }
-                    else {
-                        character1.image_path = al_load_bitmap(img1_location);
-                        character1Weapon.image_path = al_load_bitmap(weapon1_location);
+                    else if (char_2p_choosen){
+                        p1_img = img1_location;
+                        p1_weapon_img = weapon1_location;
                         char_1p_choosen = true;
                         display_window5();
                     }
@@ -399,14 +399,14 @@ int process_event(){
                 }
                 else if (window == 5) {
                     if (char_1p_choosen) {
-                        character2.image_path = al_load_bitmap(img2_location);
-                        character2Weapon.image_path = al_load_bitmap(weapon2_location);
+                        p2_img = img2_location;
+                        p2_weapon_img = weapon2_location;
                         char_2p_choosen = true;
                         display_window5();
                     }
                     else {
-                        character1.image_path = al_load_bitmap(img2_location);
-                        character1Weapon.image_path = al_load_bitmap(weapon2_location);
+                        p1_img = img2_location;
+                        p1_weapon_img = weapon2_location;
                         char_1p_choosen = true;
                         display_window5();
                     }
@@ -415,14 +415,14 @@ int process_event(){
             case ALLEGRO_KEY_3:
                 if (window == 5) {
                     if (char_1p_choosen) {
-                        character2.image_path = al_load_bitmap(img3_location);
-                        character2Weapon.image_path = al_load_bitmap(weapon3_location);
+                        p2_img = img3_location;
+                        p2_weapon_img = weapon3_location;
                         char_2p_choosen = true;
                         display_window5();
                     }
                     else {
-                        character1.image_path = al_load_bitmap(img3_location);
-                        character1Weapon.image_path = al_load_bitmap(weapon3_location);
+                        p1_img = img3_location;
+                        p1_weapon_img = weapon3_location;
                         char_1p_choosen = true;
                         display_window5();
                     }
