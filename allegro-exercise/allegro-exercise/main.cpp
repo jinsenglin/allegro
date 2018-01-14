@@ -71,6 +71,10 @@ char weapon2_location[100] = "dart.png";
 char weapon3_location[100] = "lightning.png";
 bool char_1p_choosen = false;
 bool char_2p_choosen = false;
+char *p1_img = img1_location;
+char *p2_img = img2_location;
+char *p1_weapon_img = weapon1_location;
+char *p2_weapon_img = weapon2_location;
 
 void show_err_msg(int msg);
 void game_init();
@@ -685,8 +689,8 @@ void setup_characters() {
     character1.y = HEIGHT / 2 + 45;
     character2.x = WIDTH / 2 + 170;
     character2.y = HEIGHT / 2 + 45;
-    //character1.image_path = al_load_bitmap("dragon.png");
-    //character2.image_path= al_load_bitmap("ninja.png");
+    character1.image_path = al_load_bitmap(p1_img);
+    character2.image_path= al_load_bitmap(p2_img);
     background = al_load_bitmap("stage.jpg");
     
     character1HP = 100;
@@ -695,10 +699,10 @@ void setup_characters() {
     // Setting Character's Weapon
     character1Weapon.x = character1.x + imageWidth/2;
     character1Weapon.y = character1.y + imageHeight/2;
-    //character1Weapon.image_path = al_load_bitmap("fireball.png");
+    character1Weapon.image_path = al_load_bitmap(p1_weapon_img);
     character2Weapon.x = character2.x + imageWidth/2;
     character2Weapon.y = character2.y + imageHeight/2;
-    //character2Weapon.image_path = al_load_bitmap("dart.png");
+    character2Weapon.image_path = al_load_bitmap(p2_weapon_img);
 }
 
 void create_and_play_music2() {
