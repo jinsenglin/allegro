@@ -491,9 +491,9 @@ void display_window4() {
 void setup_characters() {
     // Setting Character
     character1.x = WIDTH / 2 - 300;
-    character1.y = HEIGHT / 2 + 75;
+    character1.y = HEIGHT / 2 + 45;
     character2.x = WIDTH / 2 + 170;
-    character2.y = HEIGHT / 2 + 75;
+    character2.y = HEIGHT / 2 + 45;
     character1.image_path = al_load_bitmap("dragon.png");
     character2.image_path= al_load_bitmap("ninja.png");
     background = al_load_bitmap("stage.jpg");
