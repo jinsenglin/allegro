@@ -17,6 +17,7 @@ ALLEGRO_BITMAP *image2 = NULL;
 ALLEGRO_BITMAP *image3 = NULL;
 ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_KEYBOARD_STATE keyState ;
+ALLEGRO_TIMER *timerJump = NULL;
 ALLEGRO_TIMER *timerWeapon = NULL;
 ALLEGRO_SAMPLE *song=NULL;
 ALLEGRO_SAMPLE *songFight=NULL;
@@ -44,6 +45,8 @@ Character character2Weapon;
 
 bool character1WeaponFlying = false;
 bool character2WeaponFlying = false;
+bool character1Jumping = false;
+bool character2Jumping = false;
 
 int character1HP = 100;
 int character2HP = 100;
@@ -170,6 +173,8 @@ int process_event(){
     al_wait_for_event(event_queue, &event);
 
     // Our setting for controlling animation
+    if(event.timer.source == timerJump){}
+    
     if(event.timer.source == timerWeapon){
         ture_Weapon = !ture_Weapon ;
         
@@ -322,8 +327,11 @@ int game_run() {
                         setup_characters();
                         
                         //Initialize Timer
+                        timerJump = al_create_timer(1.0/10.0);
                         timerWeapon = al_create_timer(1.0/10.0);
+                        al_register_event_source(event_queue, al_get_timer_event_source(timerJump));
                         al_register_event_source(event_queue, al_get_timer_event_source(timerWeapon));
+                        al_start_timer(timerJump);
                         al_start_timer(timerWeapon);
                         break;
                     case 3:
@@ -426,6 +434,7 @@ void game_destroy() {
     // Make sure you destroy all things
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
+    al_destroy_timer(timerJump);
     al_destroy_timer(timerWeapon);
     al_destroy_bitmap(image);
     if (window == 2) al_destroy_sample(songFight);
