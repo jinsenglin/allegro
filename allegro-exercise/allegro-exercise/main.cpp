@@ -69,8 +69,6 @@ char img3_location[100] = "wizard.png";
 char weapon1_location[100] = "fireball.png";
 char weapon2_location[100] = "dart.png";
 char weapon3_location[100] = "lightning.png";
-bool char_1p_choosen = false;
-bool char_2p_choosen = false;
 char *p1_img = img1_location;
 char *p2_img = img2_location;
 char *p1_weapon_img = weapon1_location;
@@ -378,18 +376,9 @@ int process_event(){
                     next_window = 3;
                 }
                 else if (window == 5) {
-                    if (char_1p_choosen) {
-                        p2_img = img1_location;
-                        p2_weapon_img = weapon1_location;
-                        char_2p_choosen = true;
-                        display_window5();
-                    }
-                    else if (char_2p_choosen){
-                        p1_img = img1_location;
-                        p1_weapon_img = weapon1_location;
-                        char_1p_choosen = true;
-                        display_window5();
-                    }
+                    p1_img = img1_location;
+                    p1_weapon_img = weapon1_location;
+                    display_window5();
                 }
                 break;
             case ALLEGRO_KEY_2:
@@ -398,34 +387,37 @@ int process_event(){
                     next_window = 5;
                 }
                 else if (window == 5) {
-                    if (char_1p_choosen) {
-                        p2_img = img2_location;
-                        p2_weapon_img = weapon2_location;
-                        char_2p_choosen = true;
-                        display_window5();
-                    }
-                    else {
-                        p1_img = img2_location;
-                        p1_weapon_img = weapon2_location;
-                        char_1p_choosen = true;
-                        display_window5();
-                    }
+                    p1_img = img2_location;
+                    p1_weapon_img = weapon2_location;
+                    display_window5();
                 }
                 break;
             case ALLEGRO_KEY_3:
                 if (window == 5) {
-                    if (char_1p_choosen) {
-                        p2_img = img3_location;
-                        p2_weapon_img = weapon3_location;
-                        char_2p_choosen = true;
-                        display_window5();
-                    }
-                    else {
-                        p1_img = img3_location;
-                        p1_weapon_img = weapon3_location;
-                        char_1p_choosen = true;
-                        display_window5();
-                    }
+                    p1_img = img3_location;
+                    p1_weapon_img = weapon3_location;
+                    display_window5();
+                }
+                break;
+            case ALLEGRO_KEY_4:
+                if (window == 5) {
+                    p2_img = img1_location;
+                    p2_weapon_img = weapon1_location;
+                    display_window5();
+                }
+                break;
+            case ALLEGRO_KEY_5:
+                if (window == 5) {
+                    p2_img = img2_location;
+                    p2_weapon_img = weapon2_location;
+                    display_window5();
+                }
+                break;
+            case ALLEGRO_KEY_6:
+                if (window == 5) {
+                    p2_img = img3_location;
+                    p2_weapon_img = weapon3_location;
+                    display_window5();
                 }
                 break;
         }
