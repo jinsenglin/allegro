@@ -47,6 +47,8 @@
 		BAD2CB42200A75D300E3CE9B /* fight.wav in Resources */ = {isa = PBXBuildFile; fileRef = BAD2CB41200A75D300E3CE9B /* fight.wav */; };
 		BAD2CB45200B0BE600E3CE9B /* dragon.png in Resources */ = {isa = PBXBuildFile; fileRef = BAD2CB43200B0BE600E3CE9B /* dragon.png */; };
 		BAD2CB46200B0BE600E3CE9B /* ninja.png in Resources */ = {isa = PBXBuildFile; fileRef = BAD2CB44200B0BE600E3CE9B /* ninja.png */; };
+		BAD2CB4B200B328300E3CE9B /* lightning.png in Resources */ = {isa = PBXBuildFile; fileRef = BAD2CB49200B328300E3CE9B /* lightning.png */; };
+		BAD2CB4C200B328300E3CE9B /* wizard.png in Resources */ = {isa = PBXBuildFile; fileRef = BAD2CB4A200B328300E3CE9B /* wizard.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -118,6 +120,8 @@
 		BAD2CB41200A75D300E3CE9B /* fight.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fight.wav; sourceTree = "<group>"; };
 		BAD2CB43200B0BE600E3CE9B /* dragon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dragon.png; sourceTree = "<group>"; };
 		BAD2CB44200B0BE600E3CE9B /* ninja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninja.png; sourceTree = "<group>"; };
+		BAD2CB49200B328300E3CE9B /* lightning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightning.png; sourceTree = "<group>"; };
+		BAD2CB4A200B328300E3CE9B /* wizard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wizard.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,8 @@
 		BA12E80A200905B600665F9B /* allegro-exercise */ = {
 			isa = PBXGroup;
 			children = (
+				BAD2CB49200B328300E3CE9B /* lightning.png */,
+				BAD2CB4A200B328300E3CE9B /* wizard.png */,
 				BAD2CB43200B0BE600E3CE9B /* dragon.png */,
 				BAD2CB44200B0BE600E3CE9B /* ninja.png */,
 				BAD2CB41200A75D300E3CE9B /* fight.wav */,
@@ -276,11 +282,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD2CB4B200B328300E3CE9B /* lightning.png in Resources */,
 				BA12E80F200905B600665F9B /* Assets.xcassets in Resources */,
 				BA12E812200905B600665F9B /* MainMenu.xib in Resources */,
 				BAD2CB40200A363700E3CE9B /* fireball.png in Resources */,
 				BAD2CB3E200A265200E3CE9B /* dart.png in Resources */,
 				BA92641B20091B2700F096B7 /* teemo.png in Resources */,
+				BAD2CB4C200B328300E3CE9B /* wizard.png in Resources */,
 				BA92641F20091B2700F096B7 /* azir.png in Resources */,
 				BA92642020091B2700F096B7 /* stage.jpg in Resources */,
 				BA92641D20091B2700F096B7 /* hello.wav in Resources */,

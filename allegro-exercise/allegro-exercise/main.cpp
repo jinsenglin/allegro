@@ -63,6 +63,15 @@ bool judge_next_window = false;
 int next_window = 2;
 bool ture_1 , ture_2, ture_Weapon;
 
+char img1_location[100] = "dragon.png";
+char img2_location[100] = "ninja.png";
+char img3_location[100] = "wizard.png";
+char weapon1_location[100] = "fireball.png";
+char weapon2_location[100] = "dart.png";
+char weapon3_location[100] = "lightning.png";
+bool char_1p_choosen = false;
+bool char_2p_choosen = false;
+
 void show_err_msg(int msg);
 void game_init();
 void game_begin();
@@ -73,6 +82,7 @@ void display_window0(int, int);
 void display_window1();
 void display_window3();
 void display_window4();
+void display_window5();
 void setup_characters();
 void create_and_play_music2();
 void stop_and_destroy_music2();
@@ -343,6 +353,10 @@ int process_event(){
                         // Restart
                         next_window = 2;
                         break;
+                    case 5:
+                        // Return
+                        next_window = 1;
+                        break;
                     default:
                         break;
                 }
@@ -353,11 +367,66 @@ int process_event(){
                 if (window == 1 || window == 4) return GAME_TERMINATE;
                 break;
                 
-            // For About Menu
+            // For About or ChooseCharacter Menu
             case ALLEGRO_KEY_1:
                 if (window == 1) {
                     judge_next_window = true;
                     next_window = 3;
+                }
+                else if (window == 5) {
+                    if (char_1p_choosen) {
+                        character2.image_path = al_load_bitmap(img1_location);
+                        character2Weapon.image_path = al_load_bitmap(weapon1_location);
+                        char_2p_choosen = true;
+                        display_window5();
+                    }
+                    else {
+                        character1.image_path = al_load_bitmap(img1_location);
+                        character1Weapon.image_path = al_load_bitmap(weapon1_location);
+                        char_1p_choosen = true;
+                        display_window5();
+                    }
+                }
+                break;
+            case ALLEGRO_KEY_2:
+                // choose character 1P
+                if (window == 5) {
+                    if (char_1p_choosen) {
+                        character2.image_path = al_load_bitmap(img2_location);
+                        character2Weapon.image_path = al_load_bitmap(weapon2_location);
+                        char_2p_choosen = true;
+                        display_window5();
+                    }
+                    else {
+                        character1.image_path = al_load_bitmap(img2_location);
+                        character1Weapon.image_path = al_load_bitmap(weapon2_location);
+                        char_1p_choosen = true;
+                        display_window5();
+                    }
+                }
+                break;
+            case ALLEGRO_KEY_3:
+                // choose character 1P
+                if (window == 5) {
+                    if (char_1p_choosen) {
+                        character2.image_path = al_load_bitmap(img3_location);
+                        character2Weapon.image_path = al_load_bitmap(weapon3_location);
+                        char_2p_choosen = true;
+                        display_window5();
+                    }
+                    else {
+                        character1.image_path = al_load_bitmap(img3_location);
+                        character1Weapon.image_path = al_load_bitmap(weapon3_location);
+                        char_1p_choosen = true;
+                        display_window5();
+                    }
+                }
+                break;
+                // For choose character
+            case ALLEGRO_KEY_C:
+                if (window == 1) {
+                    judge_next_window = true;
+                    next_window = 5;
                 }
                 break;
         }
@@ -398,6 +467,9 @@ int game_run() {
                         break;
                     case 3:
                         display_window3();
+                        break;
+                    case 5:
+                        display_window5();
                         break;
                     default:
                         break;
@@ -489,6 +561,25 @@ int game_run() {
             }
         }
     }
+    else if (window == 5){
+        if(judge_next_window) {
+            window = next_window;
+            judge_next_window = false;
+            switch (next_window) {
+                case 1:
+                    display_window1();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else {
+            // Listening for new event
+            if (!al_is_event_queue_empty(event_queue)) {
+                error = process_event();
+            }
+        }
+    }
     return error;
 }
 
@@ -519,9 +610,11 @@ void display_window1() {
     
     // Load and draw text
     font = al_load_ttf_font("pirulen.ttf",12,0);
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Press 'c' to choose character");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+120 , ALLEGRO_ALIGN_CENTRE, "Press '1' to about");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to start");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to exit");
+    al_draw_rectangle(200, 360, 600, 400, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 410, 600, 450, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 460, 600, 500, al_map_rgb(255, 255, 255), 0);
     al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
@@ -559,14 +652,46 @@ void display_window4() {
     al_flip_display();
 }
 
+void display_window5() {
+    // Clear
+    al_clear_to_color(al_map_rgb(100,100,100));
+    
+    // Setting Character
+    character1.x = WIDTH / 2 - 300;
+    character1.y = HEIGHT / 2 + 45;
+    character2.x = WIDTH / 2 - 65;
+    character2.y = HEIGHT / 2 + 45;
+    character3.x = WIDTH / 2 + 170;
+    character3.y = HEIGHT / 2 + 45;
+    
+    al_draw_bitmap(al_load_bitmap(img1_location), character1.x, character1.y, 0);
+    al_draw_bitmap(al_load_bitmap(img2_location), character2.x, character2.y, 0);
+    al_draw_bitmap(al_load_bitmap(img3_location), character3.x, character3.y, 0);
+    
+    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to return");
+    al_draw_rectangle(200, 510, 600, 550, al_map_rgb(255, 255, 255), 0);
+    
+    // Load and draw text
+    if (char_1p_choosen && !char_2p_choosen){
+        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2-20 , ALLEGRO_ALIGN_CENTRE, "Please choose 2P character");
+    }
+    else if (char_2p_choosen){
+        // draw nothing
+    }
+    else {
+        al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2-40 , ALLEGRO_ALIGN_CENTRE, "Please choose 1P character");
+    }
+    al_flip_display();
+}
+
 void setup_characters() {
     // Setting Character
     character1.x = WIDTH / 2 - 300;
     character1.y = HEIGHT / 2 + 45;
     character2.x = WIDTH / 2 + 170;
     character2.y = HEIGHT / 2 + 45;
-    character1.image_path = al_load_bitmap("dragon.png");
-    character2.image_path= al_load_bitmap("ninja.png");
+    //character1.image_path = al_load_bitmap("dragon.png");
+    //character2.image_path= al_load_bitmap("ninja.png");
     background = al_load_bitmap("stage.jpg");
     
     character1HP = 100;
@@ -575,10 +700,10 @@ void setup_characters() {
     // Setting Character's Weapon
     character1Weapon.x = character1.x + imageWidth/2;
     character1Weapon.y = character1.y + imageHeight/2;
-    character1Weapon.image_path = al_load_bitmap("fireball.png");
+    //character1Weapon.image_path = al_load_bitmap("fireball.png");
     character2Weapon.x = character2.x + imageWidth/2;
     character2Weapon.y = character2.y + imageHeight/2;
-    character2Weapon.image_path = al_load_bitmap("dart.png");
+    //character2Weapon.image_path = al_load_bitmap("dart.png");
 }
 
 void create_and_play_music2() {
