@@ -296,7 +296,7 @@ int process_event(){
                 if (!character1WeaponFlying) character1Weapon.x = character1.x + 64;
                 break;
             case ALLEGRO_KEY_X:
-                if (!character1WeaponFlying) character1WeaponFlying = true;
+                if (!character1WeaponFlying && character1JumpingState == 0) character1WeaponFlying = true;
                 break;
 
             // P2 control
@@ -324,7 +324,7 @@ int process_event(){
                 }
                 break;
             case ALLEGRO_KEY_Y:
-                if (!character2WeaponFlying) character2WeaponFlying = true;
+                if (!character2WeaponFlying && character2JumpingState == 0) character2WeaponFlying = true;
                 break;
 
             // For Start or Return Menu
