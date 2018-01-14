@@ -17,6 +17,7 @@ ALLEGRO_BITMAP *image2 = NULL;
 ALLEGRO_BITMAP *image3 = NULL;
 ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_KEYBOARD_STATE keyState ;
+ALLEGRO_TIMER *timerClock = NULL;
 ALLEGRO_TIMER *timerJump = NULL;
 ALLEGRO_TIMER *timerWeapon = NULL;
 ALLEGRO_SAMPLE *song=NULL;
@@ -42,6 +43,9 @@ Character character3;
 
 Character character1Weapon;
 Character character2Weapon;
+
+int clock = 10;
+bool clockMode = true;
 
 bool character1WeaponFlying = false;
 bool character2WeaponFlying = false;
@@ -186,6 +190,10 @@ int process_event(){
     al_wait_for_event(event_queue, &event);
 
     // Our setting for controlling animation
+    if(event.timer.source == timerClock){
+        clock -= 1;
+    }
+    
     if(event.timer.source == timerJump){
         switch (character1JumpingState) {
             case 0:
@@ -449,10 +457,13 @@ int game_run() {
                         setup_characters();
                         
                         //Initialize Timer
+                        timerClock = al_create_timer(1.0);
                         timerJump = al_create_timer(1.0/10.0);
                         timerWeapon = al_create_timer(1.0/10.0);
+                        al_register_event_source(event_queue, al_get_timer_event_source(timerClock));
                         al_register_event_source(event_queue, al_get_timer_event_source(timerJump));
                         al_register_event_source(event_queue, al_get_timer_event_source(timerWeapon));
+                        al_start_timer(timerClock);
                         al_start_timer(timerJump);
                         al_start_timer(timerWeapon);
                         break;
@@ -482,6 +493,12 @@ int game_run() {
             }
         }
         else {
+            if (clockMode && clock == 0) {
+                winner = 0;
+                judge_next_window = true;
+                next_window = 4;
+                stop_and_destroy_music2();
+            }
             if (character1HP <= 0 || character2HP <=0 ) {
                 if (character1HP <= 0) winner = 2;
                 else winner = 1;
@@ -495,6 +512,13 @@ int game_run() {
                 al_draw_bitmap(background, 0, 0, 0);
                 al_draw_bitmap(character1.image_path, character1.x, character1.y, 0);
                 al_draw_bitmap(character2.image_path, character2.x, character2.y, 0);
+                
+                // Draw clock
+                if (clockMode) {
+                    char clockstr[2] = "";
+                    sprintf(clockstr, "%d", clock);
+                    al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2, ALLEGRO_ALIGN_CENTRE, clockstr);
+                }
                 
                 // Draw HP bar
                 al_draw_filled_rectangle(10, 10, 10 + character1HP, 20, al_map_rgb(255, 0, 0));
@@ -578,6 +602,7 @@ void game_destroy() {
     // Make sure you destroy all things
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
+    al_destroy_timer(timerClock);
     al_destroy_timer(timerJump);
     al_destroy_timer(timerWeapon);
     al_destroy_bitmap(image);
@@ -634,7 +659,8 @@ void display_window4() {
     font = al_load_ttf_font("pirulen.ttf",12,0);
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+20 , ALLEGRO_ALIGN_CENTRE, "Game Over");
     if (winner == 1) al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Winner: P1");
-    else al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Winner: P2");
+    else if (winner == 2) al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Winner: P2");
+    else al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+70 , ALLEGRO_ALIGN_CENTRE, "Time's Up. No Winner");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+170 , ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to restart");
     al_draw_text(font, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2+220 , ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to end");
     al_draw_rectangle(200, 250, 600, 450, al_map_rgb(255, 255, 255), 0);
@@ -712,6 +738,7 @@ void setup_characters() {
     character2.image_path= al_load_bitmap(p2_img);
     background = al_load_bitmap("stage.jpg");
     
+    clock = 10;
     character1HP = 100;
     character2HP = 100;
     
