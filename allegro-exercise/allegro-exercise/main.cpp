@@ -45,8 +45,9 @@ Character character2Weapon;
 
 bool character1WeaponFlying = false;
 bool character2WeaponFlying = false;
-bool character1Jumping = false;
-bool character2Jumping = false;
+
+int character1JumpingState = 0;
+int character2JumpingState = 0;
 
 int character1HP = 100;
 int character2HP = 100;
@@ -173,7 +174,35 @@ int process_event(){
     al_wait_for_event(event_queue, &event);
 
     // Our setting for controlling animation
-    if(event.timer.source == timerJump){}
+    if(event.timer.source == timerJump){
+        if (character1JumpingState > 0) {} // TODO
+        switch (character2JumpingState) {
+            case 0:
+                break;
+            case 1:
+                character2JumpingState = 2;
+                character2.y -= 64;
+                if (!character2WeaponFlying) character2Weapon.y = character2.y + 64;
+                break;
+            case 2:
+                character2JumpingState = 3;
+                character2.y -= 64;
+                if (!character2WeaponFlying) character2Weapon.y = character2.y + 64;
+                break;
+            case 3:
+                character2JumpingState = 4;
+                character2.y += 64;
+                if (!character2WeaponFlying) character2Weapon.y = character2.y + 64;
+                break;
+            case 4:
+                character2JumpingState = 0;
+                character2.y += 64;
+                if (!character2WeaponFlying) character2Weapon.y = character2.y + 64;
+                break;
+            default:
+                break;
+        }
+    }
     
     if(event.timer.source == timerWeapon){
         ture_Weapon = !ture_Weapon ;
@@ -181,39 +210,39 @@ int process_event(){
         if (character1WeaponFlying) {
             if (character1Weapon.x > WIDTH) {
                 character1WeaponFlying = false;
-                character1Weapon.x = character1.x + 50;
-                character1Weapon.y = character1.y + 50;
+                character1Weapon.x = character1.x + 64;
+                character1Weapon.y = character1.y + 64;
             }
             else {
                 character1Weapon.x += 64;
             }
             
             // Object Collision Detection
-            if (character1Weapon.x >= character2.x && character1Weapon.x <= character2.x + 100 && character1Weapon.y >= character2.y && character1Weapon.y <= character2.y + 100) {
+            if (character1Weapon.x >=  character2.x && character1Weapon.x <=  character2.x+128 && character1Weapon.y == character2.y+64) {
                 character2HP -= 25;
                 
                 character1WeaponFlying = false;
-                character1Weapon.x = character1.x + 50;
-                character1Weapon.y = character1.y + 50;
+                character1Weapon.x = character1.x + 64;
+                character1Weapon.y = character1.y + 64;
             }
         }
         if (character2WeaponFlying) {
             if (character2Weapon.x < 0) {
                 character2WeaponFlying = false;
-                character2Weapon.x = character2.x + 50;
-                character2Weapon.y = character2.y + 50;
+                character2Weapon.x = character2.x + 64;
+                character2Weapon.y = character2.y + 64;
             }
             else {
                 character2Weapon.x -= 64;
             }
             
             // Object Collision Detection
-            if (character2Weapon.x >= character1.x && character2Weapon.x <= character1.x + 100 && character2Weapon.y >= character1.y && character2Weapon.y <= character1.y + 100) {
+            if (character2Weapon.x ==  character1.x && character2Weapon.x <=  character1.x+128 && character2Weapon.y == character1.y+64) {
                 character1HP -= 25;
                 
                 character2WeaponFlying = false;
-                character2Weapon.x = character2.x + 50;
-                character2Weapon.y = character2.y + 50;
+                character2Weapon.x = character2.x + 64;
+                character2Weapon.y = character2.y + 64;
             }
         }
     }
@@ -246,20 +275,27 @@ int process_event(){
 
             // P2 control
             case ALLEGRO_KEY_UP:
-                if (character2.y - 30 >= 0) character2.y -= 30;
-                if (!character2WeaponFlying) character2Weapon.y = character2.y + 64;
+                if (character2JumpingState == 0) character2JumpingState = 1;
+                /*if (character2.y - 30 >= 0) character2.y -= 30;
+                if (!character2WeaponFlying) character2Weapon.y = character2.y + 64;*/
                 break;
             /*case ALLEGRO_KEY_DOWN:
                 if (character2.y + 30 <= HEIGHT-100) character2.y += 30;
                 if (!character2WeaponFlying) character2Weapon.y = character2.y + 64;
                 break;*/
             case ALLEGRO_KEY_RIGHT:
-                if (character2.x + 30 <= WIDTH-100) character2.x += 30;
-                if (!character2WeaponFlying) character2Weapon.x = character2.x + 64;
+                if (character2JumpingState == 0) {
+                    if (character2.x + 30 <= WIDTH-100) character2.x += 30;
+                    if (!character2WeaponFlying) character2Weapon.x = character2.x + 64;
+                    
+                }
                 break;
             case ALLEGRO_KEY_LEFT:
-                if (character2.x - 30 >= 0) character2.x -= 30;
-                if (!character2WeaponFlying) character2Weapon.x = character2.x + 64;
+                if (character2JumpingState == 0) {
+                    if (character2.x - 30 >= 0) character2.x -= 30;
+                    if (!character2WeaponFlying) character2Weapon.x = character2.x + 64;
+                    
+                }
                 break;
             case ALLEGRO_KEY_Y:
                 if (!character2WeaponFlying) character2WeaponFlying = true;
