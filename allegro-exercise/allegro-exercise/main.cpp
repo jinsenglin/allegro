@@ -45,7 +45,7 @@ Character character1Weapon;
 Character character2Weapon;
 
 int clock = 10;
-bool clockMode = true;
+bool clockMode = false;
 
 bool character1WeaponFlying = false;
 bool character2WeaponFlying = false;
