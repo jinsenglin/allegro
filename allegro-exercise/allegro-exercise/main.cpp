@@ -175,7 +175,32 @@ int process_event(){
 
     // Our setting for controlling animation
     if(event.timer.source == timerJump){
-        if (character1JumpingState > 0) {} // TODO
+        switch (character1JumpingState) {
+            case 0:
+                break;
+            case 1:
+                character1JumpingState = 2;
+                character1.y -= 64;
+                if (!character1WeaponFlying) character1Weapon.y = character1.y + 64;
+                break;
+            case 2:
+                character1JumpingState = 3;
+                character1.y -= 64;
+                if (!character1WeaponFlying) character1Weapon.y = character1.y + 64;
+                break;
+            case 3:
+                character1JumpingState = 4;
+                character1.y += 64;
+                if (!character1WeaponFlying) character1Weapon.y = character1.y + 64;
+                break;
+            case 4:
+                character1JumpingState = 0;
+                character1.y += 64;
+                if (!character1WeaponFlying) character1Weapon.y = character1.y + 64;
+                break;
+            default:
+                break;
+        }
         switch (character2JumpingState) {
             case 0:
                 break;
@@ -237,7 +262,7 @@ int process_event(){
             }
             
             // Object Collision Detection
-            if (character2Weapon.x ==  character1.x && character2Weapon.x <=  character1.x+128 && character2Weapon.y == character1.y+64) {
+            if (character2Weapon.x >=  character1.x && character2Weapon.x <=  character1.x+128 && character2Weapon.y == character1.y+64) {
                 character1HP -= 25;
                 
                 character2WeaponFlying = false;
@@ -254,8 +279,9 @@ int process_event(){
         {
             // P1 control
             case ALLEGRO_KEY_W:
-                if (character1.y - 30 >= 0) character1.y -= 30;
-                if (!character1WeaponFlying) character1Weapon.y = character1.y + 64;
+                if (character1JumpingState == 0) character1JumpingState = 1;
+                /*if (character1.y - 30 >= 0) character1.y -= 30;
+                if (!character1WeaponFlying) character1Weapon.y = character1.y + 64;*/
                 break;
             /*case ALLEGRO_KEY_S:
                 if (character1.y + 30 <= HEIGHT-100) character1.y += 30;
